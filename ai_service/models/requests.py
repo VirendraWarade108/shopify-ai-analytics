@@ -36,46 +36,42 @@ class QueryRequest(BaseModel):
         """Validate question content"""
         if not v or not v.strip():
             raise ValueError("Question cannot be empty")
-        
-        # Remove excessive whitespace
-        v = " ".join(v.split())
-        
+        v = " ".join(v.split())  # Remove excessive whitespace
         return v
-    
+
     @validator("shop_domain")
-def validate_shop_domain(cls, v):
-    """Validate shop domain format"""
-    if not v or not v.strip():
-        raise ValueError("Shop domain cannot be empty")
-    
-    v = v.strip().lower()
-    
-    # Allow demo domain
-    if v == "demo.myshopify.com":
+    def validate_shop_domain(cls, v):
+        """Validate shop domain format"""
+        if not v or not v.strip():
+            raise ValueError("Shop domain cannot be empty")
+        
+        v = v.strip().lower()
+        
+        # Allow demo domain
+        if v == "demo.myshopify.com":
+            return v
+        
+        # Ensure domain ends with myshopify.com
+        if not v.endswith(".myshopify.com"):
+            v = f"{v}.myshopify.com"
+        
         return v
-    
-    # Validate myshopify.com domain
-    if not v.endswith(".myshopify.com"):
-        v = f"{v}.myshopify.com"
-    
-    return v
 
-@validator("access_token")
-def validate_access_token(cls, v):
-    """Validate access token"""
-    if not v or not v.strip():
-        raise ValueError("Access token cannot be empty")
-    
-    return v.strip()
+    @validator("access_token")
+    def validate_access_token(cls, v):
+        """Validate access token"""
+        if not v or not v.strip():
+            raise ValueError("Access token cannot be empty")
+        return v.strip()
 
-class Config:
-    json_schema_extra = {
-        "example": {
-            "question": "How many units of Blue T-Shirt will I need next month?",
-            "shop_domain": "demo.myshopify.com",
-            "access_token": "demo_token",
-            "context": {
-                "timestamp": "2024-12-27T10:00:00Z"
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "question": "How many units of Blue T-Shirt will I need next month?",
+                "shop_domain": "demo.myshopify.com",
+                "access_token": "demo_token",
+                "context": {
+                    "timestamp": "2024-12-27T10:00:00Z"
+                }
             }
         }
-    }

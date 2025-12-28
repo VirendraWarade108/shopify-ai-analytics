@@ -1,0 +1,2 @@
+# Update .ruby-version file
+echo "3.3.6" > .ruby-version

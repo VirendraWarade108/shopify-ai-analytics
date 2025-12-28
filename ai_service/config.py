@@ -2,57 +2,70 @@
 Configuration management for AI Service
 """
 
-import os
 from typing import List
 from pydantic_settings import BaseSettings
-from pydantic import Field
+from pydantic import Field, Extra
 
 
 class Settings(BaseSettings):
     """Application settings"""
-    
+
     # Application metadata
     APP_NAME: str = "Shopify Analytics AI Service"
     VERSION: str = "1.0.0"
     ENVIRONMENT: str = Field(default="development", env="ENVIRONMENT")
     DEBUG: bool = Field(default=True, env="DEBUG")
-    
+
     # Server configuration
     HOST: str = Field(default="0.0.0.0", env="HOST")
     PORT: int = Field(default=8000, env="PORT")
-    
+
     # Anthropic API configuration
     ANTHROPIC_API_KEY: str = Field(default="", env="ANTHROPIC_API_KEY")
-    ANTHROPIC_MODEL: str = Field(default="claude-sonnet-4-20250514", env="ANTHROPIC_MODEL")
+    ANTHROPIC_MODEL: str = Field(default="claude-sonnet-4-5", env="ANTHROPIC_MODEL")
     ANTHROPIC_MAX_TOKENS: int = Field(default=4096, env="ANTHROPIC_MAX_TOKENS")
     ANTHROPIC_TEMPERATURE: float = Field(default=0.7, env="ANTHROPIC_TEMPERATURE")
-    
+
+    # Database and cache
+    DATABASE_URL: str = Field(..., env="DATABASE_URL")
+    REDIS_URL: str = Field(..., env="REDIS_URL")
+
+    # Shopify API
+    SHOPIFY_API_KEY: str = Field(..., env="SHOPIFY_API_KEY")
+    SHOPIFY_API_SECRET: str = Field(..., env="SHOPIFY_API_SECRET")
+    SHOPIFY_SCOPES: str = Field(..., env="SHOPIFY_SCOPES")
+
+    # Security
+    LOCKBOX_MASTER_KEY: str = Field(..., env="LOCKBOX_MASTER_KEY")
+    SECRET_KEY_BASE: str = Field(..., env="SECRET_KEY_BASE")
+
     # Demo mode configuration
     DEMO_MODE: bool = Field(default=True, env="DEMO_MODE")
-    
+
     # CORS configuration
     CORS_ORIGINS: List[str] = Field(
         default=["http://localhost:3000", "http://localhost:3001"],
         env="CORS_ORIGINS"
     )
-    
+
     # Logging configuration
     LOG_LEVEL: str = Field(default="INFO", env="LOG_LEVEL")
     LOG_FORMAT: str = Field(default="json", env="LOG_FORMAT")
-    
+
     # Forecasting configuration
     FORECAST_DAYS: int = Field(default=30, env="FORECAST_DAYS")
     HISTORICAL_DAYS: int = Field(default=90, env="HISTORICAL_DAYS")
     SAFETY_STOCK_MULTIPLIER: float = Field(default=1.2, env="SAFETY_STOCK_MULTIPLIER")
-    
+
     # Agent configuration
     AGENT_TIMEOUT: int = Field(default=120, env="AGENT_TIMEOUT")
     MAX_RETRIES: int = Field(default=3, env="MAX_RETRIES")
-    
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = True
+        extra = Extra.forbid  # Strictly forbid unknown fields
 
 
 # Create global settings instance
@@ -63,19 +76,22 @@ settings = Settings()
 def validate_settings():
     """Validate critical settings"""
     errors = []
-    
+
     if not settings.ANTHROPIC_API_KEY or settings.ANTHROPIC_API_KEY == "your_anthropic_api_key_here":
         errors.append("ANTHROPIC_API_KEY is not configured")
-    
+
+    if not settings.SHOPIFY_API_KEY or settings.SHOPIFY_API_KEY == "your_api_key_here":
+        errors.append("SHOPIFY_API_KEY is not configured")
+
     if settings.ANTHROPIC_TEMPERATURE < 0 or settings.ANTHROPIC_TEMPERATURE > 1:
         errors.append("ANTHROPIC_TEMPERATURE must be between 0 and 1")
-    
+
     if settings.FORECAST_DAYS < 1:
         errors.append("FORECAST_DAYS must be at least 1")
-    
+
     if settings.HISTORICAL_DAYS < settings.FORECAST_DAYS:
         errors.append("HISTORICAL_DAYS should be greater than FORECAST_DAYS")
-    
+
     if errors:
         raise ValueError(f"Configuration errors: {', '.join(errors)}")
 

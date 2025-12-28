@@ -1,0 +1,32 @@
+D, [2025-12-28T11:09:01.699770 #15392] DEBUG -- :   [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+D, [2025-12-28T11:09:01.703324 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+D, [2025-12-28T11:09:01.705616 #15392] DEBUG -- :   [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+D, [2025-12-28T11:09:01.707909 #15392] DEBUG -- :   [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-28 05:39:01.707097', '2025-12-28 05:39:01.707104') RETURNING "key"[0m
+D, [2025-12-28T11:09:01.710351 #15392] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+I, [2025-12-28T11:09:01.711809 #15392]  INFO -- : Migrating to CreateShops (20241227000001)
+D, [2025-12-28T11:09:01.725317 #15392] DEBUG -- :   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2025-12-28T11:09:01.728679 #15392] DEBUG -- :   [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "shops" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "shopify_domain" varchar NOT NULL, "shopify_token_ciphertext" text, "active" boolean DEFAULT 1 NOT NULL, "shop_name" varchar, "shop_email" varchar, "shop_owner" varchar, "plan_name" varchar, "country_code" varchar, "currency" varchar, "installed_at" datetime(6), "uninstalled_at" datetime(6), "last_authenticated_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+D, [2025-12-28T11:09:01.731478 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_shops_on_shopify_domain" ON "shops" ("shopify_domain")[0m
+D, [2025-12-28T11:09:01.735774 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_shops_on_active" ON "shops" ("active")[0m
+D, [2025-12-28T11:09:01.739481 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_shops_on_created_at" ON "shops" ("created_at")[0m
+D, [2025-12-28T11:09:01.743467 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_shops_on_installed_at" ON "shops" ("installed_at")[0m
+D, [2025-12-28T11:09:01.747880 #15392] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241227000001') RETURNING "version"[0m
+D, [2025-12-28T11:09:01.749849 #15392] DEBUG -- :   [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+I, [2025-12-28T11:09:01.751722 #15392]  INFO -- : Migrating to CreateAnalyticsQueries (20241227000002)
+D, [2025-12-28T11:09:01.759776 #15392] DEBUG -- :   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2025-12-28T11:09:01.763887 #15392] DEBUG -- :   [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "analytics_queries" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "shop_id" integer NOT NULL, "question" text NOT NULL, "status" varchar DEFAULT 'pending' NOT NULL, "intent" json, "shopifyql_query" text, "insights" json, "confidence_score" decimal(5,4), "response_data" json, "error_message" text, "completed_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_b912684a44"
+FOREIGN KEY ("shop_id")
+  REFERENCES "shops" ("id")
+)[0m
+D, [2025-12-28T11:09:01.767464 #15392] DEBUG -- :   [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_analytics_queries_on_shop_id" ON "analytics_queries" ("shop_id")[0m
+D, [2025-12-28T11:09:01.771183 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_analytics_queries_on_status" ON "analytics_queries" ("status")[0m
+D, [2025-12-28T11:09:01.776417 #15392] DEBUG -- :   [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_analytics_queries_on_created_at" ON "analytics_queries" ("created_at")[0m
+D, [2025-12-28T11:09:01.779268 #15392] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_analytics_queries_on_completed_at" ON "analytics_queries" ("completed_at")[0m
+D, [2025-12-28T11:09:01.784093 #15392] DEBUG -- :   [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_analytics_queries_on_confidence_score" ON "analytics_queries" ("confidence_score")[0m
+D, [2025-12-28T11:09:01.787240 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_queries_on_shop_and_created_at" ON "analytics_queries" ("shop_id", "created_at")[0m
+D, [2025-12-28T11:09:01.792105 #15392] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_queries_on_shop_and_status" ON "analytics_queries" ("shop_id", "status")[0m
+D, [2025-12-28T11:09:01.796067 #15392] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241227000002') RETURNING "version"[0m
+D, [2025-12-28T11:09:01.812091 #15392] DEBUG -- :   [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+I, [2025-12-28T11:09:46.674996 #18352]  INFO -- : [f21f4039-0323-4563-a293-4d839c3ef194] Started GET "/health" for ::1 at 2025-12-28 11:09:46 +0530
+D, [2025-12-28T11:09:46.828222 #18352] DEBUG -- : [f21f4039-0323-4563-a293-4d839c3ef194]   [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+I, [2025-12-28T11:20:17.785814 #18352]  INFO -- : [05894640-2483-40d5-8292-7cccdc8374da] Started GET "/health" for ::1 at 2025-12-28 11:20:17 +0530
