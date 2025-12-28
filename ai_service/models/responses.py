@@ -1,7 +1,3 @@
----
-
-### File: ai_service/models/responses.py
-```python
 """
 Response models for API responses
 """

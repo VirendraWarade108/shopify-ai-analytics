@@ -387,4 +387,5 @@ curl -X POST $BASE_URL/api/v1/questions \
 echo -e "\n\nDone!"
 ```
 
-Run
+Run 
+with: chmod +x test_api.sh && ./test_api.sh

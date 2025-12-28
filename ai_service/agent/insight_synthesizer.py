@@ -1,8 +1,3 @@
-"""
-Insight Synthesizer
-Stage 5: Transforms data into business-friendly insights
-"""
-
 import structlog
 from typing import Dict, Any, List
 from anthropic import Anthropic
