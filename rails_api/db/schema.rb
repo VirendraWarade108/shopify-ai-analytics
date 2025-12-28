@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_01_000002) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_27_000002) do
   create_table "analytics_queries", force: :cascade do |t|
     t.integer "shop_id", null: false
     t.text "question", null: false

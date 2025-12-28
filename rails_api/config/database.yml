@@ -1,4 +1,3 @@
-# SQLite3 database configuration for development and test environments
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -15,8 +14,3 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
-  # For production deployments, consider using PostgreSQL instead:
-  # adapter: postgresql
-  # encoding: unicode
-  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  # url: <%= ENV['DATABASE_URL'] %>
