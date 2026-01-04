@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Analytics AI - Demo Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .loading-dots {
+            display: inline-block;
+        }
+        
+        .loading-dots span {
+            animation: blink 1.4s infinite both;
+        }
+        
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes blink {
+            0%, 80%, 100% { opacity: 0; }
+            40% { opacity: 1; }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-info {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .badge-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Configuration
+        const API_BASE_URL = 'http://localhost:3000';
+
+        // Sample Questions by Category
+        const SAMPLE_QUESTIONS = {
+            inventory: [
+                "How many units of Blue T-Shirt will I need next month?",
+                "How much inventory should I reorder?",
+                "Forecast inventory needs for all products",
+                "What's my reorder point for Black Jeans?"
+            ],
+            lowStock: [
+                "Which products will go out of stock in 7 days?",
+                "Show me products with low inventory",
+                "What's my current stock level for White Sneakers?",
+                "List products below 50 units"
+            ],
+            sales: [
+                "Top 5 selling products last week",
+                "What were my best sellers in November?",
+                "Show sales trends for last month",
+                "Revenue by product category"
+            ],
+            customers: [
+                "Which customers placed repeat orders in last 90 days?",
+                "Show my top 5 customers by order count",
+                "Customer lifetime value analysis",
+                "Who are my most loyal customers?"
+            ]
+        };
+
+        // Main App Component
+        function App() {
+            const [question, setQuestion] = useState('');
+            const [loading, setLoading] = useState(false);
+            const [result, setResult] = useState(null);
+            const [error, setError] = useState(null);
+            const [history, setHistory] = useState([]);
+            const [activeTab, setActiveTab] = useState('query');
+            const [servicesStatus, setServicesStatus] = useState({
+                rails: 'checking',
+                python: 'checking'
+            });
+
+            // Check services health on mount
+            useEffect(() => {
+                checkServicesHealth();
+            }, []);
+
+            const checkServicesHealth = async () => {
+                // Check Rails API
+                try {
+                    const railsResponse = await fetch(`${API_BASE_URL}/health`);
+                    setServicesStatus(prev => ({
+                        ...prev,
+                        rails: railsResponse.ok ? 'healthy' : 'unhealthy'
+                    }));
+                } catch (e) {
+                    setServicesStatus(prev => ({ ...prev, rails: 'offline' }));
+                }
+
+                // Check Python AI Service
+                try {
+                    const pythonResponse = await fetch('http://localhost:8000/health');
+                    setServicesStatus(prev => ({
+                        ...prev,
+                        python: pythonResponse.ok ? 'healthy' : 'unhealthy'
+                    }));
+                } catch (e) {
+                    setServicesStatus(prev => ({ ...prev, python: 'offline' }));
+                }
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!question.trim()) return;
+
+                setLoading(true);
+                setError(null);
+                setResult(null);
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/v1/questions`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ question: question.trim() })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        setResult(data.data);
+                        loadHistory();
+                    } else {
+                        setError(data.error || 'Failed to process question');
+                    }
+                } catch (err) {
+                    setError(`Connection error: ${err.message}. Make sure both services are running.`);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            const loadHistory = async () => {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/v1/questions`);
+                    const data = await response.json();
+                    if (data.success) {
+                        setHistory(data.data || []);
+                    }
+                } catch (err) {
+                    console.error('Failed to load history:', err);
+                }
+            };
+
+            const useSampleQuestion = (q) => {
+                setQuestion(q);
+                setActiveTab('query');
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <header className="gradient-bg text-white shadow-lg">
+                        <div className="max-w-7xl mx-auto px-4 py-6">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-4">
+                                    <i className="fas fa-brain text-4xl"></i>
+                                    <div>
+                                        <h1 className="text-3xl font-bold">Shopify Analytics AI</h1>
+                                        <p className="text-purple-200 text-sm">
+                                            Powered by 5-Stage AI Pipeline + Linear Regression
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="flex space-x-4">
+                                    <ServiceStatus 
+                                        service="Rails API" 
+                                        status={servicesStatus.rails}
+                                        icon="fa-server"
+                                    />
+                                    <ServiceStatus 
+                                        service="Python AI" 
+                                        status={servicesStatus.python}
+                                        icon="fa-robot"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="max-w-7xl mx-auto px-4 py-8">
+                        {/* Tabs */}
+                        <div className="bg-white rounded-lg shadow-sm mb-6">
+                            <div className="border-b border-gray-200">
+                                <nav className="flex -mb-px">
+                                    <TabButton
+                                        active={activeTab === 'query'}
+                                        onClick={() => setActiveTab('query')}
+                                        icon="fa-search"
+                                        text="Query Analytics"
+                                    />
+                                    <TabButton
+                                        active={activeTab === 'samples'}
+                                        onClick={() => setActiveTab('samples')}
+                                        icon="fa-lightbulb"
+                                        text="Sample Questions"
+                                    />
+                                    <TabButton
+                                        active={activeTab === 'history'}
+                                        onClick={() => {
+                                            setActiveTab('history');
+                                            loadHistory();
+                                        }}
+                                        icon="fa-history"
+                                        text="Query History"
+                                    />
+                                    <TabButton
+                                        active={activeTab === 'about'}
+                                        onClick={() => setActiveTab('about')}
+                                        icon="fa-info-circle"
+                                        text="About"
+                                    />
+                                </nav>
+                            </div>
+                        </div>
+
+                        {/* Tab Content */}
+                        <div className="slide-in">
+                            {activeTab === 'query' && (
+                                <QueryTab
+                                    question={question}
+                                    setQuestion={setQuestion}
+                                    handleSubmit={handleSubmit}
+                                    loading={loading}
+                                    result={result}
+                                    error={error}
+                                />
+                            )}
+
+                            {activeTab === 'samples' && (
+                                <SamplesTab useSampleQuestion={useSampleQuestion} />
+                            )}
+
+                            {activeTab === 'history' && (
+                                <HistoryTab history={history} />
+                            )}
+
+                            {activeTab === 'about' && (
+                                <AboutTab />
+                            )}
+                        </div>
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-white border-t border-gray-200 mt-12">
+                        <div className="max-w-7xl mx-auto px-4 py-6 text-center text-gray-600">
+                            <p className="text-sm">
+                                Built with React, Rails, Python & Claude AI • Demo Mode Active 🚀
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        // Service Status Component
+        function ServiceStatus({ service, status, icon }) {
+            const statusColors = {
+                healthy: 'bg-green-500',
+                unhealthy: 'bg-yellow-500',
+                offline: 'bg-red-500',
+                checking: 'bg-gray-400 pulse-animation'
+            };
+
+            return (
+                <div className="flex items-center space-x-2 bg-white bg-opacity-20 px-3 py-2 rounded-lg">
+                    <i className={`fas ${icon} text-sm`}></i>
+                    <span className="text-sm font-medium">{service}</span>
+                    <div className={`w-2 h-2 rounded-full ${statusColors[status]}`}></div>
+                </div>
+            );
+        }
+
+        // Tab Button Component
+        function TabButton({ active, onClick, icon, text }) {
+            return (
+                <button
+                    onClick={onClick}
+                    className={`px-6 py-4 text-sm font-medium transition-colors ${
+                        active
+                            ? 'border-b-2 border-purple-600 text-purple-600'
+                            : 'text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-gray-300'
+                    }`}
+                >
+                    <i className={`fas ${icon} mr-2`}></i>
+                    {text}
+                </button>
+            );
+        }
+
+        // Query Tab Component
+        function QueryTab({ question, setQuestion, handleSubmit, loading, result, error }) {
+            return (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Left Column - Query Input */}
+                    <div className="space-y-6">
+                        <div className="bg-white rounded-lg shadow-lg p-6">
+                            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                                <i className="fas fa-comment-dots text-purple-600 mr-2"></i>
+                                Ask a Question
+                            </h2>
+                            
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Natural Language Query
+                                    </label>
+                                    <textarea
+                                        value={question}
+                                        onChange={(e) => setQuestion(e.target.value)}
+                                        placeholder="e.g., How many units of Blue T-Shirt will I need next month?"
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none"
+                                        rows="4"
+                                        disabled={loading}
+                                    />
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    disabled={loading || !question.trim()}
+                                    className="w-full gradient-bg text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {loading ? (
+                                        <span className="loading-dots">
+                                            Processing<span>.</span><span>.</span><span>.</span>
+                                        </span>
+                                    ) : (
+                                        <>
+                                            <i className="fas fa-paper-plane mr-2"></i>
+                                            Analyze with AI
+                                        </>
+                                    )}
+                                </button>
+                            </form>
+
+                            {/* Quick Actions */}
+                            <div className="mt-6 pt-6 border-t border-gray-200">
+                                <p className="text-sm font-medium text-gray-700 mb-3">Quick Examples:</p>
+                                <div className="space-y-2">
+                                    <QuickExample 
+                                        text="Inventory forecast" 
+                                        onClick={() => setQuestion("How many units of Blue T-Shirt will I need next month?")}
+                                    />
+                                    <QuickExample 
+                                        text="Top products" 
+                                        onClick={() => setQuestion("Top 5 selling products last week")}
+                                    />
+                                    <QuickExample 
+                                        text="Low stock alert" 
+                                        onClick={() => setQuestion("Which products will go out of stock in 7 days?")}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Pipeline Info */}
+                        <PipelineInfo />
+                    </div>
+
+                    {/* Right Column - Results */}
+                    <div className="space-y-6">
+                        {loading && <LoadingState />}
+                        {error && <ErrorState error={error} />}
+                        {result && <ResultsDisplay result={result} />}
+                        {!loading && !error && !result && <EmptyState />}
+                    </div>
+                </div>
+            );
+        }
+
+        // Quick Example Component
+        function QuickExample({ text, onClick }) {
+            return (
+                <button
+                    onClick={onClick}
+                    className="w-full text-left px-3 py-2 text-sm text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                >
+                    <i className="fas fa-arrow-right mr-2"></i>
+                    {text}
+                </button>
+            );
+        }
+
+        // Pipeline Info Component
+        function PipelineInfo() {
+            const stages = [
+                { icon: 'fa-brain', name: 'Intent Classification', desc: 'Understand the question' },
+                { icon: 'fa-sitemap', name: 'Query Planning', desc: 'Plan data retrieval' },
+                { icon: 'fa-code', name: 'Query Generation', desc: 'Create ShopifyQL' },
+                { icon: 'fa-chart-line', name: 'Execution + ML', desc: 'Run & forecast' },
+                { icon: 'fa-lightbulb', name: 'Insight Synthesis', desc: 'Business language' }
+            ];
+
+            return (
+                <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg shadow-lg p-6">
+                    <h3 className="text-lg font-bold text-gray-900 mb-4">
+                        <i className="fas fa-cogs text-purple-600 mr-2"></i>
+                        5-Stage AI Pipeline
+                    </h3>
+                    <div className="space-y-3">
+                        {stages.map((stage, index) => (
+                            <div key={index} className="flex items-start space-x-3">
+                                <div className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                    {index + 1}
+                                </div>
+                                <div className="flex-1">
+                                    <div className="flex items-center space-x-2">
+                                        <i className={`fas ${stage.icon} text-purple-600 text-sm`}></i>
+                                        <p className="font-semibold text-gray-900 text-sm">{stage.name}</p>
+                                    </div>
+                                    <p className="text-xs text-gray-600 mt-1">{stage.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // Loading State Component
+        function LoadingState() {
+            return (
+                <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mb-4"></div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Processing Your Query</h3>
+                    <p className="text-gray-600 mb-4">Running through 5-stage AI pipeline...</p>
+                    <div className="space-y-2 text-sm text-left max-w-md mx-auto">
+                        <div className="flex items-center space-x-2 text-green-600">
+                            <i className="fas fa-check-circle"></i>
+                            <span>Intent classified</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-green-600">
+                            <i className="fas fa-check-circle"></i>
+                            <span>Query planned</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-yellow-600 pulse-animation">
+                            <i className="fas fa-spinner fa-spin"></i>
+                            <span>Executing query...</span>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Error State Component
+        function ErrorState({ error }) {
+            return (
+                <div className="bg-red-50 border border-red-200 rounded-lg shadow-lg p-6">
+                    <div className="flex items-start space-x-3">
+                        <i className="fas fa-exclamation-circle text-red-600 text-2xl"></i>
+                        <div className="flex-1">
+                            <h3 className="text-lg font-semibold text-red-900 mb-2">Error</h3>
+                            <p className="text-red-700 mb-4">{error}</p>
+                            <div className="bg-white rounded p-3 text-sm text-gray-700">
+                                <p className="font-semibold mb-2">Troubleshooting:</p>
+                                <ul className="list-disc list-inside space-y-1">
+                                    <li>Make sure Rails API is running on port 3000</li>
+                                    <li>Make sure Python AI service is running on port 8000</li>
+                                    <li>Check that DEMO_MODE=true in both .env files</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Empty State Component
+        function EmptyState() {
+            return (
+                <div className="bg-white rounded-lg shadow-lg p-12 text-center">
+                    <i className="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Ready to Analyze</h3>
+                    <p className="text-gray-600 mb-6">
+                        Ask a question about your inventory, sales, or customers to get started.
+                    </p>
+                    <div className="inline-flex items-center space-x-2 text-sm text-purple-600">
+                        <i className="fas fa-arrow-left"></i>
+                        <span>Enter your question on the left</span>
+                    </div>
+                </div>
+            );
+        }
+
+        // Results Display Component
+        function ResultsDisplay({ result }) {
+            const { insights, intent, confidence, created_at } = result;
+
+            return (
+                <div className="space-y-6 slide-in">
+                    {/* Summary Card */}
+                    <div className="bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-lg shadow-lg p-6">
+                        <div className="flex items-start justify-between mb-4">
+                            <div>
+                                <h3 className="text-2xl font-bold mb-2">
+                                    <i className="fas fa-check-circle mr-2"></i>
+                                    Analysis Complete
+                                </h3>
+                                <p className="text-purple-100 text-sm">
+                                    {new Date(created_at).toLocaleString()}
+                                </p>
+                            </div>
+                            <ConfidenceBadge confidence={confidence} />
+                        </div>
+                        <p className="text-lg leading-relaxed">
+                            {insights?.summary || 'Analysis completed successfully'}
+                        </p>
+                    </div>
+
+                    {/* Intent Classification */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                            <i className="fas fa-brain text-purple-600 mr-2"></i>
+                            Intent Classification
+                        </h4>
+                        <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                                <span className="text-gray-700">Domain:</span>
+                                <span className="font-semibold text-purple-600">
+                                    {intent?.domain || 'N/A'}
+                                </span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span className="text-gray-700">Confidence:</span>
+                                <span className="font-semibold text-green-600">
+                                    {intent?.confidence ? (intent.confidence * 100).toFixed(0) : 0}%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Key Findings */}
+                    {insights?.key_findings && insights.key_findings.length > 0 && (
+                        <div className="bg-white rounded-lg shadow-lg p-6">
+                            <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                                <i className="fas fa-list-ul text-blue-600 mr-2"></i>
+                                Key Findings
+                            </h4>
+                            <ul className="space-y-3">
+                                {insights.key_findings.map((finding, index) => (
+                                    <li key={index} className="flex items-start space-x-3">
+                                        <i className="fas fa-check text-green-600 mt-1"></i>
+                                        <span className="text-gray-700 flex-1">{finding}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    {/* Recommendations */}
+                    {insights?.recommendations && insights.recommendations.length > 0 && (
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg shadow-lg p-6 border border-green-200">
+                            <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                                <i className="fas fa-lightbulb text-yellow-600 mr-2"></i>
+                                Recommendations
+                            </h4>
+                            <ul className="space-y-3">
+                                {insights.recommendations.map((rec, index) => (
+                                    <li key={index} className="flex items-start space-x-3">
+                                        <i className="fas fa-arrow-right text-green-600 mt-1"></i>
+                                        <span className="text-gray-700 flex-1 font-medium">{rec}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    {/* Data Summary */}
+                    {insights?.data_summary && (
+                        <div className="bg-white rounded-lg shadow-lg p-6">
+                            <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                                <i className="fas fa-database text-gray-600 mr-2"></i>
+                                Data Summary
+                            </h4>
+                            <div className="grid grid-cols-2 gap-4">
+                                {Object.entries(insights.data_summary).map(([key, value]) => (
+                                    <div key={key} className="bg-gray-50 rounded-lg p-3">
+                                        <p className="text-xs text-gray-600 mb-1">
+                                            {key.replace(/_/g, ' ').toUpperCase()}
+                                        </p>
+                                        <p className="text-lg font-bold text-gray-900">
+                                            {typeof value === 'number' ? value.toLocaleString() : value}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Confidence Badge Component
+        function ConfidenceBadge({ confidence }) {
+            const percentage = (confidence * 100).toFixed(0);
+            let color = 'bg-yellow-500';
+            if (percentage >= 80) color = 'bg-green-500';
+            else if (percentage < 50) color = 'bg-red-500';
+
+            return (
+                <div className={`${color} text-white px-4 py-2 rounded-full font-bold text-sm`}>
+                    {percentage}% Confident
+                </div>
+            );
+        }
+
+        // Samples Tab Component
+        function SamplesTab({ useSampleQuestion }) {
+            const categories = [
+                { 
+                    key: 'inventory', 
+                    title: 'Inventory Forecasting',
+                    icon: 'fa-boxes',
+                    color: 'blue',
+                    description: 'Predict future inventory needs with ML forecasting'
+                },
+                { 
+                    key: 'lowStock', 
+                    title: 'Low Stock Alerts',
+                    icon: 'fa-exclamation-triangle',
+                    color: 'yellow',
+                    description: 'Identify products at risk of stockout'
+                },
+                { 
+                    key: 'sales', 
+                    title: 'Sales Analysis',
+                    icon: 'fa-chart-line',
+                    color: 'green',
+                    description: 'Analyze sales performance and trends'
+                },
+                { 
+                    key: 'customers', 
+                    title: 'Customer Insights',
+                    icon: 'fa-users',
+                    color: 'purple',
+                    description: 'Understand customer behavior patterns'
+                }
+            ];
+
+            return (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {categories.map((category) => (
+                        <div key={category.key} className="bg-white rounded-lg shadow-lg p-6 card-hover">
+                            <div className="flex items-start space-x-4 mb-4">
+                                <div className={`flex-shrink-0 w-12 h-12 bg-${category.color}-100 rounded-lg flex items-center justify-center`}>
+                                    <i className={`fas ${category.icon} text-${category.color}-600 text-xl`}></i>
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                                        {category.title}
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        {category.description}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div className="space-y-2">
+                                {SAMPLE_QUESTIONS[category.key].map((question, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => useSampleQuestion(question)}
+                                        className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-purple-50 rounded-lg transition-colors text-sm text-gray-700 hover:text-purple-600"
+                                    >
+                                        <i className="fas fa-play text-xs mr-2"></i>
+                                        {question}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // History Tab Component
+        function HistoryTab({ history }) {
+            if (!history || history.length === 0) {
+                return (
+                    <div className="bg-white rounded-lg shadow-lg p-12 text-center">
+                        <i className="fas fa-history text-6xl text-gray-300 mb-4"></i>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">No Query History</h3>
+                        <p className="text-gray-600">
+                            Your query history will appear here after you run some analyses.
+                        </p>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div className="p-6 border-b border-gray-200">
+                        <h3 className="text-xl font-bold text-gray-900">
+                            <i className="fas fa-history text-purple-600 mr-2"></i>
+                            Recent Queries ({history.length})
+                        </h3>
+                    </div>
+                    <div className="divide-y divide-gray-200">
+                        {history.map((query) => (
+                            <div key={query.id} className="p-6 hover:bg-gray-50 transition-colors">
+                                <div className="flex items-start justify-between mb-2">
+                                    <p className="text-gray-900 font-medium flex-1">
+                                        {query.question}
+                                    </p>
+                                    <span className={`badge ${
+                                        query.status === 'completed' ? 'badge-success' :
+                                        query.status === 'failed' ? 'badge-error' :
+                                        'badge-warning'
+                                    }`}>
+                                        {query.status}
+                                    </span>
+                                </div>
+                                <div className="flex items-center space-x-4 text-sm text-gray-600">
+                                    <span>
+                                        <i className="fas fa-clock mr-1"></i>
+                                        {new Date(query.created_at).toLocaleString()}
+                                    </span>
+                                    {query.confidence && (
+                                        <span>
+                                            <i className="fas fa-percentage mr-1"></i>
+                                            {(query.confidence * 100).toFixed(0)}% confidence
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // About Tab Component
+        function AboutTab() {
+            return (
+                <div className="space-y-6">
+                    {/* Overview */}
+                    <div className="bg-white rounded-lg shadow-lg p-8">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                            About This System
+                        </h2>
+                        <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                            This AI-powered analytics system transforms natural language questions into 
+                            actionable business insights using a sophisticated 5-stage pipeline powered 
+                            by Claude AI and linear regression forecasting.
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="text-center p-6 bg-purple-50 rounded-lg">
+                                <i className="fas fa-brain text-4xl text-purple-600 mb-3"></i>
+                                <h3 className="font-bold text-gray-900 mb-2">AI-Powered</h3>
+                                <p className="text-sm text-gray-600">
+                                    Claude Sonnet 4 for natural language understanding
+                                </p>
+                            </div>
+                            <div className="text-center p-6 bg-blue-50 rounded-lg">
+                                <i className="fas fa-chart-line text-4xl text-blue-600 mb-3"></i>
+                                <h3 className="font-bold text-gray-900 mb-2">ML Forecasting</h3>
+                                <p className="text-sm text-gray-600">
+                                    Linear regression for inventory predictions
+                                </p>
+                            </div>
+                            <div className="text-center p-6 bg-green-50 rounded-lg">
+                                <i className="fas fa-rocket text-4xl text-green-600 mb-3"></i>
+                                <h3 className="font-bold text-gray-900 mb-2">Production Ready</h3>
+                                <p className="text-sm text-gray-600">
+                                    Built with Rails, Python & modern best practices
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="bg-white rounded-lg shadow-lg p-8">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                            <i className="fas fa-code text-purple-600 mr-2"></i>
+                            Technology Stack
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 className="font-semibold text-gray-900 mb-3">Backend</h4>
+                                <ul className="space-y-2 text-gray-700">
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Ruby on Rails 8.0</li>
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Python 3.11 + FastAPI</li>
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>SQLite / PostgreSQL</li>
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>NumPy for ML</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-gray-900 mb-3">AI & Features</h4>
+                                <ul className="space-y-2 text-gray-700">
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Claude Sonnet 4 AI</li>
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>5-Stage Pipeline</li>
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Linear Regression</li>
+                                    <li><i className="fas fa-check text-green-600 mr-2"></i>RESTful API</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Features */}
+                    <div className="bg-white rounded-lg shadow-lg p-8">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                            <i className="fas fa-star text-yellow-500 mr-2"></i>
+                            Key Features
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {[
+                                'Natural language query processing',
+                                'Inventory forecasting with ML',
+                                'Low stock alerts & predictions',
+                                'Sales trend analysis',
+                                'Customer behavior insights',
+                                'Real-time confidence scoring',
+                                'Query history tracking',
+                                'Business-friendly output'
+                            ].map((feature, index) => (
+                                <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                    <i className="fas fa-check-circle text-purple-600"></i>
+                                    <span className="text-gray-700">{feature}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Demo Mode Note */}
+                    <div className="bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg shadow-lg p-6">
+                        <div className="flex items-start space-x-3">
+                            <i className="fas fa-info-circle text-yellow-600 text-2xl"></i>
+                            <div>
+                                <h4 className="text-lg font-semibold text-gray-900 mb-2">Demo Mode Active</h4>
+                                <p className="text-gray-700 mb-2">
+                                    This system is running in demo mode with synthetic data. No Shopify store 
+                                    or paid API keys are required!
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    Perfect for demonstrations, interviews, and showcasing the system architecture.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

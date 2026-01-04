@@ -1,38 +1,29 @@
 # CORS configuration for cross-origin requests
-# This initializer configures Cross-Origin Resource Sharing (CORS)
-# to allow the frontend application to communicate with the API
-
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    # Parse allowed origins from environment variable
-    origins_list = ENV.fetch('CORS_ORIGINS', 'http://localhost:3001').split(',').map(&:strip)
-    
-    origins(*origins_list)
-
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true,
-      expose: ['Authorization', 'X-Request-Id', 'X-Runtime'],
-      max_age: 600
-
-    # Additional CORS configuration for Shopify OAuth callback
-    resource '/auth/*',
-      headers: :any,
-      methods: [:get, :post, :options],
-      credentials: true,
-      expose: ['Set-Cookie']
-  end
-
-  # Allow all origins in development mode for easier testing
+  # Development mode - allow all origins
   if Rails.env.development?
     allow do
-      origins '*'
-      
-      resource '/health',
+      origins '*'  # Allow any origin
+
+      resource '*',
         headers: :any,
-        methods: [:get, :options],
-        credentials: false
+        methods: [:get, :post, :put, :patch, :delete, :options, :head],
+        credentials: false,  # IMPORTANT: Must be false with wildcard
+        expose: ['Authorization', 'X-Request-Id', 'X-Runtime'],
+        max_age: 600
+    end
+  else
+    # Production: Use specific origins with credentials
+    allow do
+      origins_list = ENV.fetch('CORS_ORIGINS', '').split(',').map(&:strip)
+      origins(*origins_list)
+
+      resource '*',
+        headers: :any,
+        methods: [:get, :post, :put, :patch, :delete, :options, :head],
+        credentials: true,
+        expose: ['Authorization', 'X-Request-Id', 'X-Runtime'],
+        max_age: 600
     end
   end
 end

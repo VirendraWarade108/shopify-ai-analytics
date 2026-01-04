@@ -50,9 +50,9 @@ class Settings(BaseSettings):
     LOCKBOX_MASTER_KEY: str = Field(default="demo_lockbox_key")
     SECRET_KEY_BASE: str = Field(default="demo_secret_base")
 
-    # CORS configuration
-    CORS_ORIGINS: List[str] = Field(
-        default=["http://localhost:3000", "http://localhost:3001"]
+    # CORS configuration - using string to avoid parsing issues
+    CORS_ORIGINS: str = Field(
+        default="http://localhost:3000,http://localhost:3001"
     )
 
     # Logging configuration
@@ -83,14 +83,12 @@ class Settings(BaseSettings):
         if v < 1:
             raise ValueError("Days must be at least 1")
         return v
-
-    @field_validator("CORS_ORIGINS", mode="before")
-    @classmethod
-    def parse_cors_origins(cls, v):
-        """Parse CORS origins from string or list"""
-        if isinstance(v, str):
-            return [origin.strip() for origin in v.split(",")]
-        return v
+    
+    def get_cors_origins_list(self) -> List[str]:
+        """Convert CORS_ORIGINS string to list"""
+        if isinstance(self.CORS_ORIGINS, list):
+            return self.CORS_ORIGINS
+        return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
 
     def validate_required_for_production(self) -> None:
         """Validate required settings for production"""

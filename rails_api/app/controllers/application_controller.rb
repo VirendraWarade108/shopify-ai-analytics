@@ -105,15 +105,17 @@ class ApplicationController < ActionController::API
   end
 
   def log_response
-    Rails.logger.info({
-      event: 'request_completed',
-      method: request.method,
-      path: request.path,
-      status: response.status,
-      request_id: request.uuid,
-      duration_ms: (Time.current - @request_start_time) * 1000 if @request_start_time
-    }.to_json)
-  end
+  duration_ms = @request_start_time ? ((Time.current - @request_start_time) * 1000) : 0
+  
+  Rails.logger.info({
+    event: 'request_completed',
+    method: request.method,
+    path: request.path,
+    status: response.status,
+    request_id: request.uuid,
+    duration_ms: duration_ms
+  }.to_json)
+end
 
   def filtered_params
     request.params.except('controller', 'action', 'format')

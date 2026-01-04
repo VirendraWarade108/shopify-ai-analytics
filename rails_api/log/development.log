@@ -51,3 +51,781 @@ I, [2025-12-28T11:20:17.785814 #18352]  INFO -- : [05894640-2483-40d5-8292-7cccd
   [1m[36mShop Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "shops" WHERE "shops"."shopify_domain" = ? LIMIT ?[0m  [["shopify_domain", "demo.myshopify.com"], ["LIMIT", 1]]
   [1m[36mShop Create (0.5ms)[0m  [1m[32mINSERT INTO "shops" ("shopify_domain", "shopify_token_ciphertext", "active", "shop_name", "shop_email", "shop_owner", "plan_name", "country_code", "currency", "installed_at", "uninstalled_at", "last_authenticated_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["shopify_domain", "demo.myshopify.com"], ["shopify_token_ciphertext", "[FILTERED]"], ["active", 1], ["shop_name", "Demo Store"], ["shop_email", "[FILTERED]"], ["shop_owner", nil], ["plan_name", nil], ["country_code", nil], ["currency", nil], ["installed_at", "2025-12-28 06:47:06.959916"], ["uninstalled_at", nil], ["last_authenticated_at", nil], ["created_at", "2025-12-28 06:47:06.964180"], ["updated_at", "2025-12-28 06:47:06.964180"]]
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[c40d87c2-7654-488b-8e88-44e2d3ae1ccc] Started GET "/" for 127.0.0.1 at 2026-01-03 21:18:43 +0530
+[62f2e056-23ea-4f55-a5ca-123e56909c1b] Started GET "/favicon.ico" for 127.0.0.1 at 2026-01-03 21:18:43 +0530
+[62f2e056-23ea-4f55-a5ca-123e56909c1b]   
+[62f2e056-23ea-4f55-a5ca-123e56909c1b] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[62f2e056-23ea-4f55-a5ca-123e56909c1b]   
+[dotenv] Loaded [33m.env[0m
+[d27ce3e8-e6a2-4b45-87ce-b75f134a4b28] Started GET "/health" for ::1 at 2026-01-03 21:33:59 +0530
+[a5ac00d8-5aa1-4166-a003-5143ca2db246] Started GET "/health" for ::1 at 2026-01-03 21:35:24 +0530
+[50c72cac-b862-40b6-84a1-411b310f8fa0] Started GET "/api/v1/questions" for ::1 at 2026-01-03 21:39:48 +0530
+[50c72cac-b862-40b6-84a1-411b310f8fa0]   
+[50c72cac-b862-40b6-84a1-411b310f8fa0] SyntaxError (D:/Documents/shopify-ai-analytics/rails_api/app/controllers/application_controller.rb:114: syntax error, unexpected `if' modifier, expecting '}'
+... @request_start_time) * 1000 if @request_start_time
+...                             ^~
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/application_controller.rb:115: syntax error, unexpected '}', expecting `end' or dummy end
+    }.to_json)
+    ^
+):
+[50c72cac-b862-40b6-84a1-411b310f8fa0]   
+[50c72cac-b862-40b6-84a1-411b310f8fa0] app/controllers/application_controller.rb:114: syntax error, unexpected `if' modifier, expecting '}'
+[50c72cac-b862-40b6-84a1-411b310f8fa0] app/controllers/application_controller.rb:115: syntax error, unexpected '}', expecting `end' or dummy end
+[50c72cac-b862-40b6-84a1-411b310f8fa0] app/controllers/api/v1/questions_controller.rb:3:in `<module:V1>'
+[50c72cac-b862-40b6-84a1-411b310f8fa0] app/controllers/api/v1/questions_controller.rb:2:in `<module:Api>'
+[50c72cac-b862-40b6-84a1-411b310f8fa0] app/controllers/api/v1/questions_controller.rb:1:in `<main>'
+[9c906bf3-b687-4ca0-83fd-730b53878601] Started GET "/favicon.ico" for ::1 at 2026-01-03 21:39:49 +0530
+[9c906bf3-b687-4ca0-83fd-730b53878601]   
+[9c906bf3-b687-4ca0-83fd-730b53878601] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[9c906bf3-b687-4ca0-83fd-730b53878601]   
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[1a8b72c2-894d-4deb-bce7-8fe3b836c680] Started GET "/health" for ::1 at 2026-01-03 21:46:35 +0530
+[eccd2361-40ff-4f58-b237-56f7b669ae22] Started GET "/health" for ::1 at 2026-01-03 21:47:52 +0530
+[1fe066c2-b459-4a9e-abd3-b2c4cb5f406e] Started GET "/health" for ::1 at 2026-01-03 21:48:20 +0530
+[f708d18d-d8a8-4ffd-b22b-71a6a9ea6347] Started GET "/health" for ::1 at 2026-01-03 21:48:34 +0530
+[6c4d90d7-902e-49b1-bf98-00de50afbbf6] Started GET "/health" for ::1 at 2026-01-03 21:48:35 +0530
+[dotenv] Loaded [33m.env[0m
+[0fd27bf6-eda7-4e7e-ab72-454867ae7e29] Started GET "/health" for ::1 at 2026-01-03 21:56:16 +0530
+[4dd0f980-febc-48a7-9a21-61ecc5c002b6] Started GET "/health" for ::1 at 2026-01-03 21:58:19 +0530
+[e3374c44-ad7a-4ec8-a67d-87cd237b9508] Started GET "/health" for ::1 at 2026-01-03 21:58:26 +0530
+[6d28df18-0a04-488e-b9a2-4dd6082c0e71] Started GET "/health" for ::1 at 2026-01-03 22:03:31 +0530
+[5ace8533-13fc-4874-bd9e-38d780e3b0db] Started GET "/health" for ::1 at 2026-01-03 22:06:52 +0530
+[dotenv] Loaded [33m.env[0m
+[0fccd0b0-6b77-483c-aa34-62ba2af57371] Started GET "/health" for ::1 at 2026-01-03 22:13:18 +0530
+[c4ead7b0-1e23-4e5f-bea7-345270325d7a] Started GET "/health" for ::1 at 2026-01-03 22:13:35 +0530
+[dotenv] Loaded [33m.env[0m
+[e40db8fb-d334-438a-805e-80112b32fe77] Started GET "/health" for ::1 at 2026-01-03 22:19:00 +0530
+[dotenv] Loaded [33m.env[0m
+[dce3b7d2-07eb-4899-b7a5-3ca994094df2] Started GET "/health" for ::1 at 2026-01-03 22:22:09 +0530
+[dotenv] Loaded [33m.env[0m
+[ba0bda75-6769-464e-a7e4-b3f725a77fd2] Started GET "/health" for ::1 at 2026-01-03 22:22:39 +0530
+[8e97eac0-3cf8-4a7f-933e-fde3e3941c76] Started GET "/health" for ::1 at 2026-01-03 22:23:17 +0530
+[dotenv] Loaded [33m.env[0m
+[6e2b5817-9efc-40ec-9165-0465bdb608d6] Started GET "/health" for ::1 at 2026-01-03 22:23:34 +0530
+[dotenv] Loaded [33m.env[0m
+[4d088277-c57e-4749-9722-5586653f669b] Started GET "/health" for ::1 at 2026-01-04 07:52:58 +0530
+[b747edc0-7f06-4d85-be1b-125e4813cdd9] Started GET "/health" for ::1 at 2026-01-04 07:52:59 +0530
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[24195fb5-9f6c-4d1a-95f3-84586c9e5a72] Started GET "/health" for ::1 at 2026-01-04 08:02:00 +0530
+[92d76acc-b437-4832-beab-a62f991c472c] Started GET "/health" for ::1 at 2026-01-04 08:03:37 +0530
+[373219cf-f872-4b59-b019-4962ff164474] Started GET "/health" for ::1 at 2026-01-04 08:03:43 +0530
+[250dd3fc-0794-4c79-963a-79cb77e44cc5] Started GET "/health" for ::1 at 2026-01-04 08:03:57 +0530
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[d686f002-5f84-4936-9f33-b86186142579] Started GET "/health" for ::1 at 2026-01-04 08:05:08 +0530
+[eb0fbfb4-725f-4e68-9c3c-42259b103247] Started GET "/health" for ::1 at 2026-01-04 08:05:40 +0530
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[37bc207a-0f19-4a72-9f05-027b34ed5a18] Started GET "/health" for ::1 at 2026-01-04 08:14:00 +0530
+[a9a55c47-48f5-41f4-93ef-989cffaeef28] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:14:04 +0530
+[a9a55c47-48f5-41f4-93ef-989cffaeef28]   
+[a9a55c47-48f5-41f4-93ef-989cffaeef28] SyntaxError (D:/Documents/shopify-ai-analytics/rails_api/app/controllers/application_controller.rb:114: syntax error, unexpected `if' modifier, expecting '}'
+... @request_start_time) * 1000 if @request_start_time
+...                             ^~
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/application_controller.rb:115: syntax error, unexpected '}', expecting `end' or dummy end
+    }.to_json)
+    ^
+):
+[a9a55c47-48f5-41f4-93ef-989cffaeef28]   
+[a9a55c47-48f5-41f4-93ef-989cffaeef28] app/controllers/application_controller.rb:114: syntax error, unexpected `if' modifier, expecting '}'
+[a9a55c47-48f5-41f4-93ef-989cffaeef28] app/controllers/application_controller.rb:115: syntax error, unexpected '}', expecting `end' or dummy end
+[a9a55c47-48f5-41f4-93ef-989cffaeef28] app/controllers/api/v1/questions_controller.rb:3:in `<module:V1>'
+[a9a55c47-48f5-41f4-93ef-989cffaeef28] app/controllers/api/v1/questions_controller.rb:2:in `<module:Api>'
+[a9a55c47-48f5-41f4-93ef-989cffaeef28] app/controllers/api/v1/questions_controller.rb:1:in `<main>'
+[dotenv] Loaded [33m.env[0m
+[edc7401e-c398-4c10-b014-db3412c9b86c] Started GET "/health" for ::1 at 2026-01-04 08:21:08 +0530
+[479b76f3-5097-4a18-ac48-c8fca121c34d] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:21:11 +0530
+[479b76f3-5097-4a18-ac48-c8fca121c34d] Processing by Api::V1::QuestionsController#create as */*
+[479b76f3-5097-4a18-ac48-c8fca121c34d]   Parameters: {"question"=>"How many units of Blue T-Shirt will I need next month?"}
+[479b76f3-5097-4a18-ac48-c8fca121c34d] {"event":"request_started","method":"POST","path":"/api/v1/questions","params":{"question":"How many units of Blue T-Shirt will I need next month?"},"ip":"::1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","request_id":"479b76f3-5097-4a18-ac48-c8fca121c34d"}
+[479b76f3-5097-4a18-ac48-c8fca121c34d] Processing question: How many units of Blue T-Shirt will I need next month?
+[479b76f3-5097-4a18-ac48-c8fca121c34d] Unhandled error: ActiveRecord::Encryption::Errors::Configuration - Missing Active Record encryption credential: active_record_encryption.primary_key
+[479b76f3-5097-4a18-ac48-c8fca121c34d] D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/config.rb:44:in `block (2 levels) in <class:Config>'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/context.rb:38:in `build_default_key_provider'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/context.rb:25:in `key_provider'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/configurable.rb:17:in `key_provider'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/scheme.rb:103:in `default_key_provider'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/scheme.rb:58:in `key_provider'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:15:in `key_provider'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:155:in `encryption_options'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:142:in `block in encrypt_as_text'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/scheme.rb:74:in `with_context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:15:in `with_context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:137:in `encrypt_as_text'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:147:in `encrypt'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:133:in `serialize_with_current'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encrypted_attribute_type.rb:43:in `serialize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/type/serialize_cast_value.rb:33:in `serialize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute.rb:208:in `_value_for_database'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute.rb:57:in `value_for_database'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute.rb:75:in `forgetting_assignment'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_set.rb:98:in `transform_values'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_set.rb:98:in `map'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/dirty.rb:391:in `forget_attribute_assignments'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/dirty.rb:277:in `changes_applied'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods/dirty.rb:241:in `_create_record'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/callbacks.rb:445:in `block in _create_record'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:913:in `_run_create_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/callbacks.rb:445:in `_create_record'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/timestamp.rb:116:in `_create_record'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:894:in `create_or_update'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/callbacks.rb:441:in `block in create_or_update'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in `block in run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/autosave_association.rb:406:in `around_save_collection_association'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:913:in `_run_save_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/callbacks.rb:441:in `create_or_update'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/timestamp.rb:127:in `create_or_update'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:391:in `save'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/validations.rb:48:in `save'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:361:in `block in save'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:417:in `block (2 levels) in with_transaction_returning_status'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/database_statements.rb:357:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:413:in `block in with_transaction_returning_status'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:409:in `with_transaction_returning_status'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:361:in `save'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/suppressor.rb:52:in `save'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:38:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1368:in `_create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:159:in `block in create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1383:in `_scoping'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:558:in `scoping'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:159:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:277:in `block (2 levels) in create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/transaction.rb:626:in `block in within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/transaction.rb:623:in `within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/database_statements.rb:367:in `within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/database_statements.rb:359:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:233:in `block in transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:232:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation/delegation.rb:106:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:276:in `block in create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation/delegation.rb:106:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:274:in `create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:232:in `find_or_create_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/querying.rb:24:in `find_or_create_by'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:149:in `demo_shop'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:16:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in `send_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `block in instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionview-8.0.4/lib/action_view/rendering.rb:40:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in `block in serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine/lazy_route_set.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in `context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/etag.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/conditional_get.rb:44:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/head.rb:15:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/migration.rb:670:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in `call_app'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/runtime.rb:24:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/sendfile.rb:131:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-mini-profiler-3.3.1/lib/mini_profiler.rb:334:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/configuration.rb:279:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:99:in `block in handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:98:in `handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:472:in `process_client'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:254:in `block in run'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+[479b76f3-5097-4a18-ac48-c8fca121c34d] Completed 500 Internal Server Error in 289ms (Views: 0.3ms | ActiveRecord: 3.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+[884f479f-aee2-4f5a-85d7-188c9a2b134e] Started GET "/health" for ::1 at 2026-01-04 08:25:41 +0530
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:25:43 +0530
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809] Processing by Api::V1::QuestionsController#create as */*
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809]   Parameters: {"question"=>"Top 5 selling products last week"}
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809] {"event":"request_started","method":"POST","path":"/api/v1/questions","params":{"question":"Top 5 selling products last week"},"ip":"::1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","request_id":"8733a4ba-ec46-4a04-a10b-98aef0e3c809"}
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809] Processing question: Top 5 selling products last week
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809] Unhandled error: NoMethodError - undefined method `shopify_token=' for an instance of Shop
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809] D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_methods.rb:512:in `method_missing'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods.rb:495:in `method_missing'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:150:in `block in demo_shop'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1359:in `block in current_scope_restoring_block'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/core.rb:480:in `initialize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/inheritance.rb:76:in `new'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/inheritance.rb:76:in `new'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:37:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1368:in `_create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:159:in `block in create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1383:in `_scoping'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:558:in `scoping'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:159:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:277:in `block (2 levels) in create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/transaction.rb:626:in `block in within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/transaction.rb:623:in `within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/database_statements.rb:367:in `within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/database_statements.rb:359:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:233:in `block in transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:232:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation/delegation.rb:106:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:276:in `block in create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation/delegation.rb:106:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:274:in `create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:232:in `find_or_create_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/querying.rb:24:in `find_or_create_by'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:149:in `demo_shop'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:16:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in `send_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `block in instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionview-8.0.4/lib/action_view/rendering.rb:40:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in `block in serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine/lazy_route_set.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in `context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/etag.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/conditional_get.rb:44:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/head.rb:15:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/migration.rb:670:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in `call_app'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/runtime.rb:24:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/sendfile.rb:131:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-mini-profiler-3.3.1/lib/mini_profiler.rb:334:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/configuration.rb:279:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:99:in `block in handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:98:in `handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:472:in `process_client'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:254:in `block in run'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+[8733a4ba-ec46-4a04-a10b-98aef0e3c809] Completed 500 Internal Server Error in 29ms (Views: 0.2ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+[dotenv] Loaded [33m.env[0m
+[6ee3768b-6140-49f4-8a4b-45379f42b2ad] Started GET "/health" for ::1 at 2026-01-04 08:26:52 +0530
+[710ef5a0-d38e-42ac-8d0c-0459782f357c] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:26:56 +0530
+[710ef5a0-d38e-42ac-8d0c-0459782f357c] Processing by Api::V1::QuestionsController#create as */*
+[710ef5a0-d38e-42ac-8d0c-0459782f357c]   Parameters: {"question"=>"Which products will go out of stock in 7 days?"}
+[710ef5a0-d38e-42ac-8d0c-0459782f357c] {"event":"request_started","method":"POST","path":"/api/v1/questions","params":{"question":"Which products will go out of stock in 7 days?"},"ip":"::1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","request_id":"710ef5a0-d38e-42ac-8d0c-0459782f357c"}
+[710ef5a0-d38e-42ac-8d0c-0459782f357c] Processing question: Which products will go out of stock in 7 days?
+[710ef5a0-d38e-42ac-8d0c-0459782f357c] Unhandled error: NoMethodError - undefined method `shopify_token=' for an instance of Shop
+[710ef5a0-d38e-42ac-8d0c-0459782f357c] D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_methods.rb:512:in `method_missing'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods.rb:495:in `method_missing'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:150:in `block in demo_shop'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1359:in `block in current_scope_restoring_block'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/core.rb:480:in `initialize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/inheritance.rb:76:in `new'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/inheritance.rb:76:in `new'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:37:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1368:in `_create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:159:in `block in create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:1383:in `_scoping'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:558:in `scoping'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:159:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:277:in `block (2 levels) in create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/transaction.rb:626:in `block in within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/transaction.rb:623:in `within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/database_statements.rb:367:in `within_new_transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/database_statements.rb:359:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:233:in `block in transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/transactions.rb:232:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation/delegation.rb:106:in `transaction'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:276:in `block in create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation/delegation.rb:106:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:274:in `create_or_find_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/relation.rb:232:in `find_or_create_by'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/querying.rb:24:in `find_or_create_by'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:149:in `demo_shop'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:16:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in `send_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `block in instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionview-8.0.4/lib/action_view/rendering.rb:40:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in `block in serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine/lazy_route_set.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in `context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/etag.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/conditional_get.rb:44:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/head.rb:15:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/migration.rb:670:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in `call_app'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/runtime.rb:24:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/sendfile.rb:131:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-mini-profiler-3.3.1/lib/mini_profiler.rb:334:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/configuration.rb:279:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:99:in `block in handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:98:in `handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:472:in `process_client'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:254:in `block in run'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+[710ef5a0-d38e-42ac-8d0c-0459782f357c] Completed 500 Internal Server Error in 48ms (Views: 0.2ms | ActiveRecord: 2.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+[dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+[101cb01a-aade-4f53-a2f1-a6eb32abce62] Started GET "/health" for ::1 at 2026-01-04 08:34:35 +0530
+[aae88fd0-65f3-4de8-bf7e-f145304fbfc2] Started GET "/health" for ::1 at 2026-01-04 08:34:37 +0530
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:34:40 +0530
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] Processing by Api::V1::QuestionsController#create as */*
+[fcf381fc-e5e0-4efc-b2d3-f28451909772]   Parameters: {"question"=>"Top 5 selling products last week"}
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] {"event":"request_started","method":"POST","path":"/api/v1/questions","params":{"question":"Top 5 selling products last week"},"ip":"::1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","request_id":"fcf381fc-e5e0-4efc-b2d3-f28451909772"}
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] Processing question: Top 5 selling products last week
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] {"event":"record_created","model":"Shop","id":1,"attributes":{}}
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] Unhandled error: ActiveRecord::AttributeMethods::Serialization::ColumnNotSerializableError - Column `intent` of type ActiveRecord::Type::Json does not support `serialize` feature.
+Usually it means that you are trying to use `serialize`
+on a column that already implements serialization natively.
+
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods/serialization.rb:199:in `block in serialize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:71:in `block in apply_to'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:69:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:69:in `apply_to'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:87:in `block in apply_pending_attribute_modifications'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:86:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:86:in `apply_pending_attribute_modifications'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:261:in `_default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:596:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/counter_cache.rb:187:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encryptable_record.rb:127:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:539:in `block in load_schema'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:536:in `synchronize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:536:in `load_schema'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:428:in `columns_hash'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:255:in `block in _default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:254:in `_default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:38:in `attribute_types'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods.rb:261:in `_has_attribute?'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/inheritance.rb:61:in `new'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:54:in `create!'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:15:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in `send_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `block in instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionview-8.0.4/lib/action_view/rendering.rb:40:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in `block in serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine/lazy_route_set.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in `context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/etag.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/conditional_get.rb:44:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/head.rb:15:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/migration.rb:670:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in `call_app'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/runtime.rb:24:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/sendfile.rb:131:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-mini-profiler-3.3.1/lib/mini_profiler.rb:334:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/configuration.rb:279:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:99:in `block in handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:98:in `handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:472:in `process_client'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:254:in `block in run'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+[fcf381fc-e5e0-4efc-b2d3-f28451909772] Completed 500 Internal Server Error in 73ms (Views: 0.3ms | ActiveRecord: 3.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+[dotenv] Loaded [33m.env[0m
+[2152671b-2536-4170-bc18-398b25a9cd61] Started GET "/health" for ::1 at 2026-01-04 08:41:05 +0530
+[33c272a8-8349-471e-9e58-d330ad060fb9] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:41:09 +0530
+[33c272a8-8349-471e-9e58-d330ad060fb9] Processing by Api::V1::QuestionsController#create as */*
+[33c272a8-8349-471e-9e58-d330ad060fb9]   Parameters: {"question"=>"Top 5 selling products last week"}
+[33c272a8-8349-471e-9e58-d330ad060fb9] {"event":"request_started","method":"POST","path":"/api/v1/questions","params":{"question":"Top 5 selling products last week"},"ip":"::1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","request_id":"33c272a8-8349-471e-9e58-d330ad060fb9"}
+[33c272a8-8349-471e-9e58-d330ad060fb9] Processing question: Top 5 selling products last week
+[33c272a8-8349-471e-9e58-d330ad060fb9] Unhandled error: ActiveRecord::AttributeMethods::Serialization::ColumnNotSerializableError - Column `intent` of type ActiveRecord::Type::Json does not support `serialize` feature.
+Usually it means that you are trying to use `serialize`
+on a column that already implements serialization natively.
+
+[33c272a8-8349-471e-9e58-d330ad060fb9] D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods/serialization.rb:199:in `block in serialize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:71:in `block in apply_to'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:69:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:69:in `apply_to'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:87:in `block in apply_pending_attribute_modifications'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:86:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:86:in `apply_pending_attribute_modifications'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:261:in `_default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:596:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/counter_cache.rb:187:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encryptable_record.rb:127:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:539:in `block in load_schema'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:536:in `synchronize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:536:in `load_schema'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:428:in `columns_hash'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:255:in `block in _default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:254:in `_default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:38:in `attribute_types'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods.rb:261:in `_has_attribute?'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/inheritance.rb:61:in `new'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:54:in `create!'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:15:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in `send_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `block in instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionview-8.0.4/lib/action_view/rendering.rb:40:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in `block in serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine/lazy_route_set.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in `context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/etag.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/conditional_get.rb:44:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/head.rb:15:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/migration.rb:670:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in `call_app'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/runtime.rb:24:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/sendfile.rb:131:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-mini-profiler-3.3.1/lib/mini_profiler.rb:334:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/configuration.rb:279:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:99:in `block in handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:98:in `handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:472:in `process_client'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:254:in `block in run'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+[33c272a8-8349-471e-9e58-d330ad060fb9] Completed 500 Internal Server Error in 39ms (Views: 0.2ms | ActiveRecord: 2.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+[14ab62dc-837b-465d-a9c2-11fbde764d50] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:42:49 +0530
+[14ab62dc-837b-465d-a9c2-11fbde764d50] Processing by Api::V1::QuestionsController#create as */*
+[14ab62dc-837b-465d-a9c2-11fbde764d50]   Parameters: {"question"=>"How many units of Blue T-Shirt will I need next month?"}
+[14ab62dc-837b-465d-a9c2-11fbde764d50] {"event":"request_started","method":"POST","path":"/api/v1/questions","params":{"question":"How many units of Blue T-Shirt will I need next month?"},"ip":"::1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","request_id":"14ab62dc-837b-465d-a9c2-11fbde764d50"}
+[14ab62dc-837b-465d-a9c2-11fbde764d50] Processing question: How many units of Blue T-Shirt will I need next month?
+[14ab62dc-837b-465d-a9c2-11fbde764d50] Unhandled error: ActiveRecord::AttributeMethods::Serialization::ColumnNotSerializableError - Column `intent` of type ActiveRecord::Type::Json does not support `serialize` feature.
+Usually it means that you are trying to use `serialize`
+on a column that already implements serialization natively.
+
+[14ab62dc-837b-465d-a9c2-11fbde764d50] D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods/serialization.rb:199:in `block in serialize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:71:in `block in apply_to'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:69:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:69:in `apply_to'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:87:in `block in apply_pending_attribute_modifications'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:86:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:86:in `apply_pending_attribute_modifications'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:261:in `_default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:596:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/counter_cache.rb:187:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/encryption/encryptable_record.rb:127:in `load_schema!'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:539:in `block in load_schema'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:536:in `synchronize'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:536:in `load_schema'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/model_schema.rb:428:in `columns_hash'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:255:in `block in _default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/connection_handling.rb:312:in `with_connection'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attributes.rb:254:in `_default_attributes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activemodel-8.0.4/lib/active_model/attribute_registration.rb:38:in `attribute_types'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/attribute_methods.rb:261:in `_has_attribute?'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/inheritance.rb:61:in `new'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/persistence.rb:54:in `create!'
+D:/Documents/shopify-ai-analytics/rails_api/app/controllers/api/v1/questions_controller.rb:15:in `create'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in `send_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `block in instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `instrument'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionview-8.0.4/lib/action_view/rendering.rb:40:in `process'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in `block in serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `each'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in `find_routes'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in `serve'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine/lazy_route_set.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in `context'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/etag.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/conditional_get.rb:44:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/head.rb:15:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activerecord-8.0.4/lib/active_record/migration.rb:670:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in `run_callbacks'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in `call_app'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/runtime.rb:24:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/activesupport-8.0.4/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-3.2.4/lib/rack/sendfile.rb:131:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-mini-profiler-3.3.1/lib/mini_profiler.rb:334:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/rack-cors-2.0.2/lib/rack/cors.rb:102:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/configuration.rb:279:in `call'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:99:in `block in handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/request.rb:98:in `handle_request'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:472:in `process_client'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/server.rb:254:in `block in run'
+D:/Softwares/Ruby33-x64/lib/ruby/gems/3.3.0/gems/puma-6.6.1/lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+[14ab62dc-837b-465d-a9c2-11fbde764d50] Completed 500 Internal Server Error in 3ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+[dotenv] Loaded [33m.env[0m
+[5786006e-91e6-45c8-86e7-30714068c8c4] Started GET "/health" for ::1 at 2026-01-04 08:45:09 +0530
+[a330c2bd-6594-4f68-a789-525e17a400a9] Started POST "/api/v1/questions" for ::1 at 2026-01-04 08:45:13 +0530
+[a330c2bd-6594-4f68-a789-525e17a400a9] Processing by Api::V1::QuestionsController#create as */*
+[a330c2bd-6594-4f68-a789-525e17a400a9]   Parameters: {"question"=>"Top 5 selling products last week"}
+[a330c2bd-6594-4f68-a789-525e17a400a9] {"event":"request_started","method":"POST","path":"/api/v1/questions","params":{"question":"Top 5 selling products last week"},"ip":"::1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36","request_id":"a330c2bd-6594-4f68-a789-525e17a400a9"}
+[a330c2bd-6594-4f68-a789-525e17a400a9] Processing question: Top 5 selling products last week
+[a330c2bd-6594-4f68-a789-525e17a400a9] {"event":"record_created","model":"AnalyticsQuery","id":1,"attributes":{}}
+[a330c2bd-6594-4f68-a789-525e17a400a9] {"event":"query_created","query_id":1,"shop_id":1,"question":"Top 5 selling products last week","question_length":32}
+[a330c2bd-6594-4f68-a789-525e17a400a9] Calling AI service for question: Top 5 selling products last week...
+[a330c2bd-6594-4f68-a789-525e17a400a9] AI service error: AiServiceClient::ServiceError - AI service processing failed: 'QueryPlanner' object has no attribute '_get_default_plan'
+[a330c2bd-6594-4f68-a789-525e17a400a9] {"event":"record_updated","model":"AnalyticsQuery","id":1,"changes":{"status":["pending","failed"],"error_message":[null,"AI service error: AI service processing failed: 'QueryPlanner' object has no attribute '_get_default_plan'"],"updated_at":["2026-01-04T03:15:13.363Z","2026-01-04T03:15:17.538Z"]}}
+[a330c2bd-6594-4f68-a789-525e17a400a9] {"event":"query_completed","query_id":1,"shop_id":1,"status":"failed","confidence":null,"processing_time_ms":null,"intent_domain":"unknown"}
+[a330c2bd-6594-4f68-a789-525e17a400a9] AI service error: AI service error: AI service processing failed: 'QueryPlanner' object has no attribute '_get_default_plan'
+[a330c2bd-6594-4f68-a789-525e17a400a9] {"event":"request_completed","method":"POST","path":"/api/v1/questions","status":503,"request_id":"a330c2bd-6594-4f68-a789-525e17a400a9","duration_ms":0}
+[a330c2bd-6594-4f68-a789-525e17a400a9] Completed 503 Service Unavailable in 4322ms (Views: 0.2ms | ActiveRecord: 5.3ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+[dotenv] Loaded [33m.env[0m

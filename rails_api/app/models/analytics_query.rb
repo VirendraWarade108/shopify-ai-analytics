@@ -30,9 +30,9 @@ class AnalyticsQuery < ApplicationRecord
   after_update :log_query_completion
 
   # Serialization for JSON fields
-  serialize :intent, coder: JSON
-  serialize :insights, coder: JSON
-  serialize :response_data, coder: JSON
+  #serialize :intent, coder: JSON
+  #serialize :insights, coder: JSON
+  #serialize :response_data, coder: JSON
 
   # Instance methods
 
