@@ -3,70 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopify Analytics AI - Demo Dashboard</title>
+    <title>Shopify Analytics AI - Premium Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
-        body {
+        * {
             font-family: 'Inter', sans-serif;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+            min-height: 100vh;
         }
         
-        .card-hover {
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(147, 51, 234, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 1rem;
+            padding: 2px;
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            padding: 2px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        
+        .pipeline-stage {
+            position: relative;
+            padding: 1rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 0.75rem;
+            border: 2px solid rgba(148, 163, 184, 0.1);
             transition: all 0.3s ease;
         }
         
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        .pipeline-stage.active {
+            background: rgba(147, 51, 234, 0.2);
+            border-color: #a855f7;
+            animation: pulse 2s infinite;
         }
         
-        .loading-dots {
-            display: inline-block;
-        }
-        
-        .loading-dots span {
-            animation: blink 1.4s infinite both;
-        }
-        
-        .loading-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .loading-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes blink {
-            0%, 80%, 100% { opacity: 0; }
-            40% { opacity: 1; }
-        }
-        
-        .pulse-animation {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .pipeline-stage.completed {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
         }
         
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
+            50% { opacity: 0.7; }
         }
         
-        .slide-in {
-            animation: slideIn 0.5s ease-out;
+        .shimmer {
+            background: linear-gradient(90deg, 
+                rgba(148, 163, 184, 0.1) 0%, 
+                rgba(148, 163, 184, 0.3) 50%, 
+                rgba(148, 163, 184, 0.1) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
         }
         
-        @keyframes slideIn {
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .metric-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        
+        .autocomplete-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .autocomplete-item:hover {
+            background: rgba(147, 51, 234, 0.1);
+            border-left-color: #a855f7;
+        }
+        
+        .confidence-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+            border-radius: 9999px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .confidence-indicator {
+            position: absolute;
+            top: -8px;
+            width: 3px;
+            height: 24px;
+            background: white;
+            border-radius: 9999px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes slideInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -74,872 +161,647 @@
             }
         }
         
-        .code-block {
-            background: #1e293b;
-            color: #e2e8f0;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.875rem;
+        .slide-in {
+            animation: slideInUp 0.5s ease-out forwards;
         }
         
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .btn-primary {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            transition: all 0.3s ease;
         }
         
-        .badge-success {
-            background-color: #dcfce7;
-            color: #166534;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4);
         }
         
-        .badge-warning {
-            background-color: #fef3c7;
-            color: #92400e;
+        .btn-primary:active {
+            transform: translateY(0);
         }
         
-        .badge-info {
-            background-color: #dbeafe;
-            color: #1e40af;
+        .dark-scrollbar::-webkit-scrollbar {
+            width: 8px;
         }
         
-        .badge-error {
-            background-color: #fee2e2;
-            color: #991b1b;
+        .dark-scrollbar::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 10px;
+        }
+        
+        .dark-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(147, 51, 234, 0.5);
+            border-radius: 10px;
+        }
+        
+        .dark-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(147, 51, 234, 0.8);
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <div id="root"></div>
-
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        // Configuration
-        const API_BASE_URL = 'http://localhost:3000';
-
-        // Sample Questions by Category
-        const SAMPLE_QUESTIONS = {
-            inventory: [
-                "How many units of Blue T-Shirt will I need next month?",
-                "How much inventory should I reorder?",
-                "Forecast inventory needs for all products",
-                "What's my reorder point for Black Jeans?"
-            ],
-            lowStock: [
-                "Which products will go out of stock in 7 days?",
-                "Show me products with low inventory",
-                "What's my current stock level for White Sneakers?",
-                "List products below 50 units"
-            ],
-            sales: [
-                "Top 5 selling products last week",
-                "What were my best sellers in November?",
-                "Show sales trends for last month",
-                "Revenue by product category"
-            ],
-            customers: [
-                "Which customers placed repeat orders in last 90 days?",
-                "Show my top 5 customers by order count",
-                "Customer lifetime value analysis",
-                "Who are my most loyal customers?"
-            ]
-        };
-
-        // Main App Component
-        function App() {
-            const [question, setQuestion] = useState('');
-            const [loading, setLoading] = useState(false);
-            const [result, setResult] = useState(null);
-            const [error, setError] = useState(null);
-            const [history, setHistory] = useState([]);
-            const [activeTab, setActiveTab] = useState('query');
-            const [servicesStatus, setServicesStatus] = useState({
-                rails: 'checking',
-                python: 'checking'
-            });
-
-            // Check services health on mount
-            useEffect(() => {
-                checkServicesHealth();
-            }, []);
-
-            const checkServicesHealth = async () => {
-                // Check Rails API
-                try {
-                    const railsResponse = await fetch(`${API_BASE_URL}/health`);
-                    setServicesStatus(prev => ({
-                        ...prev,
-                        rails: railsResponse.ok ? 'healthy' : 'unhealthy'
-                    }));
-                } catch (e) {
-                    setServicesStatus(prev => ({ ...prev, rails: 'offline' }));
-                }
-
-                // Check Python AI Service
-                try {
-                    const pythonResponse = await fetch('http://localhost:8000/health');
-                    setServicesStatus(prev => ({
-                        ...prev,
-                        python: pythonResponse.ok ? 'healthy' : 'unhealthy'
-                    }));
-                } catch (e) {
-                    setServicesStatus(prev => ({ ...prev, python: 'offline' }));
-                }
-            };
-
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                if (!question.trim()) return;
-
-                setLoading(true);
-                setError(null);
-                setResult(null);
-
-                try {
-                    const response = await fetch(`${API_BASE_URL}/api/v1/questions`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ question: question.trim() })
-                    });
-
-                    const data = await response.json();
-
-                    if (data.success) {
-                        setResult(data.data);
-                        loadHistory();
-                    } else {
-                        setError(data.error || 'Failed to process question');
-                    }
-                } catch (err) {
-                    setError(`Connection error: ${err.message}. Make sure both services are running.`);
-                } finally {
-                    setLoading(false);
-                }
-            };
-
-            const loadHistory = async () => {
-                try {
-                    const response = await fetch(`${API_BASE_URL}/api/v1/questions`);
-                    const data = await response.json();
-                    if (data.success) {
-                        setHistory(data.data || []);
-                    }
-                } catch (err) {
-                    console.error('Failed to load history:', err);
-                }
-            };
-
-            const useSampleQuestion = (q) => {
-                setQuestion(q);
-                setActiveTab('query');
-            };
-
-            return (
-                <div className="min-h-screen bg-gray-50">
-                    {/* Header */}
-                    <header className="gradient-bg text-white shadow-lg">
-                        <div className="max-w-7xl mx-auto px-4 py-6">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-4">
-                                    <i className="fas fa-brain text-4xl"></i>
-                                    <div>
-                                        <h1 className="text-3xl font-bold">Shopify Analytics AI</h1>
-                                        <p className="text-purple-200 text-sm">
-                                            Powered by 5-Stage AI Pipeline + Linear Regression
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex space-x-4">
-                                    <ServiceStatus 
-                                        service="Rails API" 
-                                        status={servicesStatus.rails}
-                                        icon="fa-server"
-                                    />
-                                    <ServiceStatus 
-                                        service="Python AI" 
-                                        status={servicesStatus.python}
-                                        icon="fa-robot"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </header>
-
-                    {/* Main Content */}
-                    <main className="max-w-7xl mx-auto px-4 py-8">
-                        {/* Tabs */}
-                        <div className="bg-white rounded-lg shadow-sm mb-6">
-                            <div className="border-b border-gray-200">
-                                <nav className="flex -mb-px">
-                                    <TabButton
-                                        active={activeTab === 'query'}
-                                        onClick={() => setActiveTab('query')}
-                                        icon="fa-search"
-                                        text="Query Analytics"
-                                    />
-                                    <TabButton
-                                        active={activeTab === 'samples'}
-                                        onClick={() => setActiveTab('samples')}
-                                        icon="fa-lightbulb"
-                                        text="Sample Questions"
-                                    />
-                                    <TabButton
-                                        active={activeTab === 'history'}
-                                        onClick={() => {
-                                            setActiveTab('history');
-                                            loadHistory();
-                                        }}
-                                        icon="fa-history"
-                                        text="Query History"
-                                    />
-                                    <TabButton
-                                        active={activeTab === 'about'}
-                                        onClick={() => setActiveTab('about')}
-                                        icon="fa-info-circle"
-                                        text="About"
-                                    />
-                                </nav>
-                            </div>
-                        </div>
-
-                        {/* Tab Content */}
-                        <div className="slide-in">
-                            {activeTab === 'query' && (
-                                <QueryTab
-                                    question={question}
-                                    setQuestion={setQuestion}
-                                    handleSubmit={handleSubmit}
-                                    loading={loading}
-                                    result={result}
-                                    error={error}
-                                />
-                            )}
-
-                            {activeTab === 'samples' && (
-                                <SamplesTab useSampleQuestion={useSampleQuestion} />
-                            )}
-
-                            {activeTab === 'history' && (
-                                <HistoryTab history={history} />
-                            )}
-
-                            {activeTab === 'about' && (
-                                <AboutTab />
-                            )}
-                        </div>
-                    </main>
-
-                    {/* Footer */}
-                    <footer className="bg-white border-t border-gray-200 mt-12">
-                        <div className="max-w-7xl mx-auto px-4 py-6 text-center text-gray-600">
-                            <p className="text-sm">
-                                Built with React, Rails, Python & Claude AI • Demo Mode Active 🚀
-                            </p>
-                        </div>
-                    </footer>
-                </div>
-            );
-        }
-
-        // Service Status Component
-        function ServiceStatus({ service, status, icon }) {
-            const statusColors = {
-                healthy: 'bg-green-500',
-                unhealthy: 'bg-yellow-500',
-                offline: 'bg-red-500',
-                checking: 'bg-gray-400 pulse-animation'
-            };
-
-            return (
-                <div className="flex items-center space-x-2 bg-white bg-opacity-20 px-3 py-2 rounded-lg">
-                    <i className={`fas ${icon} text-sm`}></i>
-                    <span className="text-sm font-medium">{service}</span>
-                    <div className={`w-2 h-2 rounded-full ${statusColors[status]}`}></div>
-                </div>
-            );
-        }
-
-        // Tab Button Component
-        function TabButton({ active, onClick, icon, text }) {
-            return (
-                <button
-                    onClick={onClick}
-                    className={`px-6 py-4 text-sm font-medium transition-colors ${
-                        active
-                            ? 'border-b-2 border-purple-600 text-purple-600'
-                            : 'text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-gray-300'
-                    }`}
-                >
-                    <i className={`fas ${icon} mr-2`}></i>
-                    {text}
-                </button>
-            );
-        }
-
-        // Query Tab Component
-        function QueryTab({ question, setQuestion, handleSubmit, loading, result, error }) {
-            return (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Left Column - Query Input */}
-                    <div className="space-y-6">
-                        <div className="bg-white rounded-lg shadow-lg p-6">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                                <i className="fas fa-comment-dots text-purple-600 mr-2"></i>
-                                Ask a Question
-                            </h2>
-                            
-                            <form onSubmit={handleSubmit} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Natural Language Query
-                                    </label>
-                                    <textarea
-                                        value={question}
-                                        onChange={(e) => setQuestion(e.target.value)}
-                                        placeholder="e.g., How many units of Blue T-Shirt will I need next month?"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none"
-                                        rows="4"
-                                        disabled={loading}
-                                    />
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={loading || !question.trim()}
-                                    className="w-full gradient-bg text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    {loading ? (
-                                        <span className="loading-dots">
-                                            Processing<span>.</span><span>.</span><span>.</span>
-                                        </span>
-                                    ) : (
-                                        <>
-                                            <i className="fas fa-paper-plane mr-2"></i>
-                                            Analyze with AI
-                                        </>
-                                    )}
-                                </button>
-                            </form>
-
-                            {/* Quick Actions */}
-                            <div className="mt-6 pt-6 border-t border-gray-200">
-                                <p className="text-sm font-medium text-gray-700 mb-3">Quick Examples:</p>
-                                <div className="space-y-2">
-                                    <QuickExample 
-                                        text="Inventory forecast" 
-                                        onClick={() => setQuestion("How many units of Blue T-Shirt will I need next month?")}
-                                    />
-                                    <QuickExample 
-                                        text="Top products" 
-                                        onClick={() => setQuestion("Top 5 selling products last week")}
-                                    />
-                                    <QuickExample 
-                                        text="Low stock alert" 
-                                        onClick={() => setQuestion("Which products will go out of stock in 7 days?")}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Pipeline Info */}
-                        <PipelineInfo />
+<body class="dark-scrollbar">
+    <!-- Header -->
+    <header class="backdrop-blur-xl bg-slate-900/50 border-b border-slate-700/50 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
                     </div>
-
-                    {/* Right Column - Results */}
-                    <div className="space-y-6">
-                        {loading && <LoadingState />}
-                        {error && <ErrorState error={error} />}
-                        {result && <ResultsDisplay result={result} />}
-                        {!loading && !error && !result && <EmptyState />}
+                    <div>
+                        <h1 class="text-xl font-bold text-white">Shopify Analytics AI</h1>
+                        <p class="text-xs text-slate-400">5-Stage AI Pipeline + ML Forecasting</p>
                     </div>
                 </div>
-            );
-        }
-
-        // Quick Example Component
-        function QuickExample({ text, onClick }) {
-            return (
-                <button
-                    onClick={onClick}
-                    className="w-full text-left px-3 py-2 text-sm text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
-                >
-                    <i className="fas fa-arrow-right mr-2"></i>
-                    {text}
-                </button>
-            );
-        }
-
-        // Pipeline Info Component
-        function PipelineInfo() {
-            const stages = [
-                { icon: 'fa-brain', name: 'Intent Classification', desc: 'Understand the question' },
-                { icon: 'fa-sitemap', name: 'Query Planning', desc: 'Plan data retrieval' },
-                { icon: 'fa-code', name: 'Query Generation', desc: 'Create ShopifyQL' },
-                { icon: 'fa-chart-line', name: 'Execution + ML', desc: 'Run & forecast' },
-                { icon: 'fa-lightbulb', name: 'Insight Synthesis', desc: 'Business language' }
-            ];
-
-            return (
-                <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg shadow-lg p-6">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">
-                        <i className="fas fa-cogs text-purple-600 mr-2"></i>
-                        5-Stage AI Pipeline
-                    </h3>
-                    <div className="space-y-3">
-                        {stages.map((stage, index) => (
-                            <div key={index} className="flex items-start space-x-3">
-                                <div className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                                    {index + 1}
-                                </div>
-                                <div className="flex-1">
-                                    <div className="flex items-center space-x-2">
-                                        <i className={`fas ${stage.icon} text-purple-600 text-sm`}></i>
-                                        <p className="font-semibold text-gray-900 text-sm">{stage.name}</p>
-                                    </div>
-                                    <p className="text-xs text-gray-600 mt-1">{stage.desc}</p>
-                                </div>
-                            </div>
-                        ))}
+                
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                        <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <span class="text-sm font-medium text-emerald-400">Demo Mode</span>
+                    </div>
+                    
+                    <button class="p-2 rounded-lg hover:bg-slate-800 transition text-slate-400 hover:text-white">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center font-bold text-white">
+                        VW
                     </div>
                 </div>
-            );
-        }
+            </div>
+        </div>
+    </header>
 
-        // Loading State Component
-        function LoadingState() {
-            return (
-                <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-                    <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mb-4"></div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Processing Your Query</h3>
-                    <p className="text-gray-600 mb-4">Running through 5-stage AI pipeline...</p>
-                    <div className="space-y-2 text-sm text-left max-w-md mx-auto">
-                        <div className="flex items-center space-x-2 text-green-600">
-                            <i className="fas fa-check-circle"></i>
-                            <span>Intent classified</span>
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="glass-card rounded-xl p-6 metric-card">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="p-3 rounded-lg bg-blue-500/10">
+                        <i class="fas fa-chart-line text-2xl text-blue-500"></i>
+                    </div>
+                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400">
+                        +12.5%
+                    </span>
+                </div>
+                <p class="text-slate-400 text-sm mb-1">Total Revenue</p>
+                <p class="text-3xl font-bold text-white">$124.5K</p>
+                <p class="text-xs text-slate-500 mt-2">Last 30 days</p>
+            </div>
+            
+            <div class="glass-card rounded-xl p-6 metric-card">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="p-3 rounded-lg bg-purple-500/10">
+                        <i class="fas fa-boxes text-2xl text-purple-500"></i>
+                    </div>
+                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-500/20 text-yellow-400">
+                        5 Low
+                    </span>
+                </div>
+                <p class="text-slate-400 text-sm mb-1">Products in Stock</p>
+                <p class="text-3xl font-bold text-white">1,247</p>
+                <p class="text-xs text-slate-500 mt-2">Across all categories</p>
+            </div>
+            
+            <div class="glass-card rounded-xl p-6 metric-card">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="p-3 rounded-lg bg-pink-500/10">
+                        <i class="fas fa-shopping-cart text-2xl text-pink-500"></i>
+                    </div>
+                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400">
+                        +8.2%
+                    </span>
+                </div>
+                <p class="text-slate-400 text-sm mb-1">Total Orders</p>
+                <p class="text-3xl font-bold text-white">3,482</p>
+                <p class="text-xs text-slate-500 mt-2">This month</p>
+            </div>
+            
+            <div class="glass-card rounded-xl p-6 metric-card">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="p-3 rounded-lg bg-emerald-500/10">
+                        <i class="fas fa-users text-2xl text-emerald-500"></i>
+                    </div>
+                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400">
+                        142 Active
+                    </span>
+                </div>
+                <p class="text-slate-400 text-sm mb-1">Total Customers</p>
+                <p class="text-3xl font-bold text-white">8,294</p>
+                <p class="text-xs text-slate-500 mt-2">24% repeat customers</p>
+            </div>
+        </div>
+
+        <!-- Main Query Interface -->
+        <div class="glass-card rounded-2xl p-8 mb-8">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-3 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600">
+                    <i class="fas fa-magic text-xl text-white"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Ask Your Analytics Question</h2>
+                    <p class="text-slate-400 text-sm">Get instant insights powered by Claude AI</p>
+                </div>
+            </div>
+            
+            <div class="gradient-border mb-6">
+                <div class="bg-slate-800/90 rounded-xl p-2">
+                    <div class="flex items-center gap-3 p-3">
+                        <i class="fas fa-search text-slate-400 text-lg"></i>
+                        <input 
+                            id="queryInput"
+                            type="text" 
+                            placeholder="How many units of Blue T-Shirt will I need next month?"
+                            class="flex-1 bg-transparent text-white text-lg outline-none placeholder-slate-500"
+                            autocomplete="off"
+                        />
+                        <button 
+                            id="submitQuery"
+                            class="btn-primary px-8 py-3 rounded-xl font-semibold text-white flex items-center gap-2"
+                        >
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Analyze</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Autocomplete Suggestions -->
+            <div id="suggestions" class="hidden">
+                <p class="text-slate-400 text-sm mb-3 flex items-center gap-2">
+                    <i class="fas fa-lightbulb"></i>
+                    Try these sample questions:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <button class="sample-question autocomplete-item glass-card rounded-lg text-left" data-question="How many units of Blue T-Shirt will I need next month?">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-boxes text-purple-400 mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-white text-sm font-medium mb-1">Inventory Forecast</p>
+                                <p class="text-slate-400 text-xs">Predict future stock needs</p>
+                            </div>
                         </div>
-                        <div className="flex items-center space-x-2 text-green-600">
-                            <i className="fas fa-check-circle"></i>
-                            <span>Query planned</span>
+                    </button>
+                    
+                    <button class="sample-question autocomplete-item glass-card rounded-lg text-left" data-question="Top 5 selling products last week">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-chart-bar text-blue-400 mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-white text-sm font-medium mb-1">Top Products</p>
+                                <p class="text-slate-400 text-xs">Best performers analysis</p>
+                            </div>
                         </div>
-                        <div className="flex items-center space-x-2 text-yellow-600 pulse-animation">
-                            <i className="fas fa-spinner fa-spin"></i>
-                            <span>Executing query...</span>
+                    </button>
+                    
+                    <button class="sample-question autocomplete-item glass-card rounded-lg text-left" data-question="Which products will go out of stock in 7 days?">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-exclamation-triangle text-yellow-400 mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-white text-sm font-medium mb-1">Low Stock Alert</p>
+                                <p class="text-slate-400 text-xs">Critical inventory warnings</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- AI Pipeline Visualizer -->
+            <div id="pipelineContainer" class="hidden mt-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
+                    <p class="text-slate-300 text-sm font-medium">Processing through AI pipeline...</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    <div class="pipeline-stage" data-stage="1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-brain text-purple-400"></i>
+                            <span class="text-sm font-semibold text-white">Intent</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Classifying query...</p>
+                        <div class="mt-2 text-xs font-mono text-slate-500">~0.5s</div>
+                    </div>
+                    
+                    <div class="pipeline-stage" data-stage="2">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-sitemap text-blue-400"></i>
+                            <span class="text-sm font-semibold text-white">Planning</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Determining sources...</p>
+                        <div class="mt-2 text-xs font-mono text-slate-500">~0.6s</div>
+                    </div>
+                    
+                    <div class="pipeline-stage" data-stage="3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-code text-emerald-400"></i>
+                            <span class="text-sm font-semibold text-white">Query</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Generating ShopifyQL...</p>
+                        <div class="mt-2 text-xs font-mono text-slate-500">~0.7s</div>
+                    </div>
+                    
+                    <div class="pipeline-stage" data-stage="4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-chart-line text-pink-400"></i>
+                            <span class="text-sm font-semibold text-white">Execute</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Running + forecasting...</p>
+                        <div class="mt-2 text-xs font-mono text-slate-500">~2.1s</div>
+                    </div>
+                    
+                    <div class="pipeline-stage" data-stage="5">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-lightbulb text-yellow-400"></i>
+                            <span class="text-sm font-semibold text-white">Insights</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Synthesizing...</p>
+                        <div class="mt-2 text-xs font-mono text-slate-500">~0.8s</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsContainer" class="hidden space-y-6">
+            <!-- Summary Card -->
+            <div class="glass-card rounded-2xl p-8 slide-in">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-emerald-500/20">
+                            <i class="fas fa-check-circle text-2xl text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Analysis Complete</h3>
+                            <p class="text-slate-400 text-sm">Processed in 4.7 seconds</p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-right">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-sm text-slate-400">Confidence:</span>
+                            <span id="confidenceValue" class="text-2xl font-bold text-emerald-400">88%</span>
+                        </div>
+                        <div class="confidence-bar w-32 relative">
+                            <div id="confidenceIndicator" class="confidence-indicator" style="left: 88%"></div>
                         </div>
                     </div>
                 </div>
-            );
-        }
-
-        // Error State Component
-        function ErrorState({ error }) {
-            return (
-                <div className="bg-red-50 border border-red-200 rounded-lg shadow-lg p-6">
-                    <div className="flex items-start space-x-3">
-                        <i className="fas fa-exclamation-circle text-red-600 text-2xl"></i>
-                        <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-red-900 mb-2">Error</h3>
-                            <p className="text-red-700 mb-4">{error}</p>
-                            <div className="bg-white rounded p-3 text-sm text-gray-700">
-                                <p className="font-semibold mb-2">Troubleshooting:</p>
-                                <ul className="list-disc list-inside space-y-1">
-                                    <li>Make sure Rails API is running on port 3000</li>
-                                    <li>Make sure Python AI service is running on port 8000</li>
-                                    <li>Check that DEMO_MODE=true in both .env files</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        // Empty State Component
-        function EmptyState() {
-            return (
-                <div className="bg-white rounded-lg shadow-lg p-12 text-center">
-                    <i className="fas fa-search text-6xl text-gray-300 mb-4"></i>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Ready to Analyze</h3>
-                    <p className="text-gray-600 mb-6">
-                        Ask a question about your inventory, sales, or customers to get started.
+                
+                <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl p-6">
+                    <p id="summaryText" class="text-xl text-white leading-relaxed">
+                        <!-- Will be filled by JS -->
                     </p>
-                    <div className="inline-flex items-center space-x-2 text-sm text-purple-600">
-                        <i className="fas fa-arrow-left"></i>
-                        <span>Enter your question on the left</span>
+                </div>
+            </div>
+            
+            <!-- Key Findings -->
+            <div class="glass-card rounded-2xl p-8 slide-in">
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fas fa-list-ul text-2xl text-blue-400"></i>
+                    <h3 class="text-2xl font-bold text-white">Key Findings</h3>
+                </div>
+                
+                <div id="findingsContainer" class="space-y-3">
+                    <!-- Will be filled by JS -->
+                </div>
+            </div>
+            
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-card rounded-2xl p-6 slide-in">
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fas fa-chart-line text-purple-400"></i>
+                        Sales Forecast
+                    </h4>
+                    <div class="chart-container">
+                        <canvas id="forecastChart"></canvas>
                     </div>
                 </div>
-            );
-        }
-
-        // Results Display Component
-        function ResultsDisplay({ result }) {
-            const { insights, intent, confidence, created_at } = result;
-
-            return (
-                <div className="space-y-6 slide-in">
-                    {/* Summary Card */}
-                    <div className="bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-lg shadow-lg p-6">
-                        <div className="flex items-start justify-between mb-4">
-                            <div>
-                                <h3 className="text-2xl font-bold mb-2">
-                                    <i className="fas fa-check-circle mr-2"></i>
-                                    Analysis Complete
-                                </h3>
-                                <p className="text-purple-100 text-sm">
-                                    {new Date(created_at).toLocaleString()}
-                                </p>
-                            </div>
-                            <ConfidenceBadge confidence={confidence} />
-                        </div>
-                        <p className="text-lg leading-relaxed">
-                            {insights?.summary || 'Analysis completed successfully'}
-                        </p>
+                
+                <div class="glass-card rounded-2xl p-6 slide-in">
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fas fa-chart-bar text-blue-400"></i>
+                        Top Products
+                    </h4>
+                    <div class="chart-container">
+                        <canvas id="productsChart"></canvas>
                     </div>
-
-                    {/* Intent Classification */}
-                    <div className="bg-white rounded-lg shadow-lg p-6">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-3">
-                            <i className="fas fa-brain text-purple-600 mr-2"></i>
-                            Intent Classification
-                        </h4>
-                        <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                                <span className="text-gray-700">Domain:</span>
-                                <span className="font-semibold text-purple-600">
-                                    {intent?.domain || 'N/A'}
-                                </span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <span className="text-gray-700">Confidence:</span>
-                                <span className="font-semibold text-green-600">
-                                    {intent?.confidence ? (intent.confidence * 100).toFixed(0) : 0}%
-                                </span>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            
+            <!-- Recommendations -->
+            <div class="glass-card rounded-2xl p-8 slide-in">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-3 rounded-xl bg-yellow-500/20">
+                        <i class="fas fa-lightbulb text-2xl text-yellow-400"></i>
                     </div>
-
-                    {/* Key Findings */}
-                    {insights?.key_findings && insights.key_findings.length > 0 && (
-                        <div className="bg-white rounded-lg shadow-lg p-6">
-                            <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                                <i className="fas fa-list-ul text-blue-600 mr-2"></i>
-                                Key Findings
-                            </h4>
-                            <ul className="space-y-3">
-                                {insights.key_findings.map((finding, index) => (
-                                    <li key={index} className="flex items-start space-x-3">
-                                        <i className="fas fa-check text-green-600 mt-1"></i>
-                                        <span className="text-gray-700 flex-1">{finding}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-
-                    {/* Recommendations */}
-                    {insights?.recommendations && insights.recommendations.length > 0 && (
-                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg shadow-lg p-6 border border-green-200">
-                            <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                                <i className="fas fa-lightbulb text-yellow-600 mr-2"></i>
-                                Recommendations
-                            </h4>
-                            <ul className="space-y-3">
-                                {insights.recommendations.map((rec, index) => (
-                                    <li key={index} className="flex items-start space-x-3">
-                                        <i className="fas fa-arrow-right text-green-600 mt-1"></i>
-                                        <span className="text-gray-700 flex-1 font-medium">{rec}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-
-                    {/* Data Summary */}
-                    {insights?.data_summary && (
-                        <div className="bg-white rounded-lg shadow-lg p-6">
-                            <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                                <i className="fas fa-database text-gray-600 mr-2"></i>
-                                Data Summary
-                            </h4>
-                            <div className="grid grid-cols-2 gap-4">
-                                {Object.entries(insights.data_summary).map(([key, value]) => (
-                                    <div key={key} className="bg-gray-50 rounded-lg p-3">
-                                        <p className="text-xs text-gray-600 mb-1">
-                                            {key.replace(/_/g, ' ').toUpperCase()}
-                                        </p>
-                                        <p className="text-lg font-bold text-gray-900">
-                                            {typeof value === 'number' ? value.toLocaleString() : value}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">AI Recommendations</h3>
+                        <p class="text-slate-400 text-sm">Actionable insights for your business</p>
+                    </div>
                 </div>
-            );
-        }
-
-        // Confidence Badge Component
-        function ConfidenceBadge({ confidence }) {
-            const percentage = (confidence * 100).toFixed(0);
-            let color = 'bg-yellow-500';
-            if (percentage >= 80) color = 'bg-green-500';
-            else if (percentage < 50) color = 'bg-red-500';
-
-            return (
-                <div className={`${color} text-white px-4 py-2 rounded-full font-bold text-sm`}>
-                    {percentage}% Confident
+                
+                <div id="recommendationsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Will be filled by JS -->
                 </div>
-            );
-        }
+            </div>
+        </div>
+    </div>
 
-        // Samples Tab Component
-        function SamplesTab({ useSampleQuestion }) {
-            const categories = [
-                { 
-                    key: 'inventory', 
-                    title: 'Inventory Forecasting',
-                    icon: 'fa-boxes',
-                    color: 'blue',
-                    description: 'Predict future inventory needs with ML forecasting'
-                },
-                { 
-                    key: 'lowStock', 
-                    title: 'Low Stock Alerts',
-                    icon: 'fa-exclamation-triangle',
-                    color: 'yellow',
-                    description: 'Identify products at risk of stockout'
-                },
-                { 
-                    key: 'sales', 
-                    title: 'Sales Analysis',
-                    icon: 'fa-chart-line',
-                    color: 'green',
-                    description: 'Analyze sales performance and trends'
-                },
-                { 
-                    key: 'customers', 
-                    title: 'Customer Insights',
-                    icon: 'fa-users',
-                    color: 'purple',
-                    description: 'Understand customer behavior patterns'
+    <script>
+        // Configuration
+        const API_BASE = 'http://localhost:3000';
+        
+        // DOM Elements
+        const queryInput = document.getElementById('queryInput');
+        const submitBtn = document.getElementById('submitQuery');
+        const suggestions = document.getElementById('suggestions');
+        const pipelineContainer = document.getElementById('pipelineContainer');
+        const resultsContainer = document.getElementById('resultsContainer');
+        
+        // Show suggestions on focus
+        queryInput.addEventListener('focus', () => {
+            suggestions.classList.remove('hidden');
+        });
+        
+        // Sample question click handlers
+        document.querySelectorAll('.sample-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const question = btn.dataset.question;
+                queryInput.value = question;
+                submitQuery();
+            });
+        });
+        
+        // Submit query
+        submitBtn.addEventListener('click', submitQuery);
+        queryInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitQuery();
+        });
+        
+        async function submitQuery() {
+            const question = queryInput.value.trim();
+            if (!question) return;
+            
+            // Hide suggestions, show pipeline
+            suggestions.classList.add('hidden');
+            resultsContainer.classList.add('hidden');
+            pipelineContainer.classList.remove('hidden');
+            
+            // Animate pipeline stages
+            animatePipeline();
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/questions`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayResults(data.data);
+                } else {
+                    showError(data.error || 'Failed to process query');
                 }
-            ];
-
-            return (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {categories.map((category) => (
-                        <div key={category.key} className="bg-white rounded-lg shadow-lg p-6 card-hover">
-                            <div className="flex items-start space-x-4 mb-4">
-                                <div className={`flex-shrink-0 w-12 h-12 bg-${category.color}-100 rounded-lg flex items-center justify-center`}>
-                                    <i className={`fas ${category.icon} text-${category.color}-600 text-xl`}></i>
-                                </div>
-                                <div className="flex-1">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-1">
-                                        {category.title}
-                                    </h3>
-                                    <p className="text-sm text-gray-600">
-                                        {category.description}
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div className="space-y-2">
-                                {SAMPLE_QUESTIONS[category.key].map((question, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => useSampleQuestion(question)}
-                                        className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-purple-50 rounded-lg transition-colors text-sm text-gray-700 hover:text-purple-600"
-                                    >
-                                        <i className="fas fa-play text-xs mr-2"></i>
-                                        {question}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            );
-        }
-
-        // History Tab Component
-        function HistoryTab({ history }) {
-            if (!history || history.length === 0) {
-                return (
-                    <div className="bg-white rounded-lg shadow-lg p-12 text-center">
-                        <i className="fas fa-history text-6xl text-gray-300 mb-4"></i>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">No Query History</h3>
-                        <p className="text-gray-600">
-                            Your query history will appear here after you run some analyses.
-                        </p>
-                    </div>
-                );
+            } catch (error) {
+                showError('Connection error. Make sure the API is running on port 3000.');
             }
-
-            return (
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div className="p-6 border-b border-gray-200">
-                        <h3 className="text-xl font-bold text-gray-900">
-                            <i className="fas fa-history text-purple-600 mr-2"></i>
-                            Recent Queries ({history.length})
-                        </h3>
-                    </div>
-                    <div className="divide-y divide-gray-200">
-                        {history.map((query) => (
-                            <div key={query.id} className="p-6 hover:bg-gray-50 transition-colors">
-                                <div className="flex items-start justify-between mb-2">
-                                    <p className="text-gray-900 font-medium flex-1">
-                                        {query.question}
-                                    </p>
-                                    <span className={`badge ${
-                                        query.status === 'completed' ? 'badge-success' :
-                                        query.status === 'failed' ? 'badge-error' :
-                                        'badge-warning'
-                                    }`}>
-                                        {query.status}
-                                    </span>
-                                </div>
-                                <div className="flex items-center space-x-4 text-sm text-gray-600">
-                                    <span>
-                                        <i className="fas fa-clock mr-1"></i>
-                                        {new Date(query.created_at).toLocaleString()}
-                                    </span>
-                                    {query.confidence && (
-                                        <span>
-                                            <i className="fas fa-percentage mr-1"></i>
-                                            {(query.confidence * 100).toFixed(0)}% confidence
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            );
         }
-
-        // About Tab Component
-        function AboutTab() {
-            return (
-                <div className="space-y-6">
-                    {/* Overview */}
-                    <div className="bg-white rounded-lg shadow-lg p-8">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                            About This System
-                        </h2>
-                        <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                            This AI-powered analytics system transforms natural language questions into 
-                            actionable business insights using a sophisticated 5-stage pipeline powered 
-                            by Claude AI and linear regression forecasting.
-                        </p>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="text-center p-6 bg-purple-50 rounded-lg">
-                                <i className="fas fa-brain text-4xl text-purple-600 mb-3"></i>
-                                <h3 className="font-bold text-gray-900 mb-2">AI-Powered</h3>
-                                <p className="text-sm text-gray-600">
-                                    Claude Sonnet 4 for natural language understanding
-                                </p>
-                            </div>
-                            <div className="text-center p-6 bg-blue-50 rounded-lg">
-                                <i className="fas fa-chart-line text-4xl text-blue-600 mb-3"></i>
-                                <h3 className="font-bold text-gray-900 mb-2">ML Forecasting</h3>
-                                <p className="text-sm text-gray-600">
-                                    Linear regression for inventory predictions
-                                </p>
-                            </div>
-                            <div className="text-center p-6 bg-green-50 rounded-lg">
-                                <i className="fas fa-rocket text-4xl text-green-600 mb-3"></i>
-                                <h3 className="font-bold text-gray-900 mb-2">Production Ready</h3>
-                                <p className="text-sm text-gray-600">
-                                    Built with Rails, Python & modern best practices
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Tech Stack */}
-                    <div className="bg-white rounded-lg shadow-lg p-8">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                            <i className="fas fa-code text-purple-600 mr-2"></i>
-                            Technology Stack
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <h4 className="font-semibold text-gray-900 mb-3">Backend</h4>
-                                <ul className="space-y-2 text-gray-700">
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Ruby on Rails 8.0</li>
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Python 3.11 + FastAPI</li>
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>SQLite / PostgreSQL</li>
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>NumPy for ML</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-gray-900 mb-3">AI & Features</h4>
-                                <ul className="space-y-2 text-gray-700">
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Claude Sonnet 4 AI</li>
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>5-Stage Pipeline</li>
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>Linear Regression</li>
-                                    <li><i className="fas fa-check text-green-600 mr-2"></i>RESTful API</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Features */}
-                    <div className="bg-white rounded-lg shadow-lg p-8">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                            <i className="fas fa-star text-yellow-500 mr-2"></i>
-                            Key Features
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                                'Natural language query processing',
-                                'Inventory forecasting with ML',
-                                'Low stock alerts & predictions',
-                                'Sales trend analysis',
-                                'Customer behavior insights',
-                                'Real-time confidence scoring',
-                                'Query history tracking',
-                                'Business-friendly output'
-                            ].map((feature, index) => (
-                                <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                                    <i className="fas fa-check-circle text-purple-600"></i>
-                                    <span className="text-gray-700">{feature}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Demo Mode Note */}
-                    <div className="bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg shadow-lg p-6">
-                        <div className="flex items-start space-x-3">
-                            <i className="fas fa-info-circle text-yellow-600 text-2xl"></i>
-                            <div>
-                                <h4 className="text-lg font-semibold text-gray-900 mb-2">Demo Mode Active</h4>
-                                <p className="text-gray-700 mb-2">
-                                    This system is running in demo mode with synthetic data. No Shopify store 
-                                    or paid API keys are required!
-                                </p>
-                                <p className="text-sm text-gray-600">
-                                    Perfect for demonstrations, interviews, and showcasing the system architecture.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
+        
+        function animatePipeline() {
+            const stages = document.querySelectorAll('.pipeline-stage');
+            stages.forEach(stage => {
+                stage.classList.remove('active', 'completed');
+            });
+            
+            let currentStage = 0;
+            const interval = setInterval(() => {
+                if (currentStage > 0) {
+                    stages[currentStage - 1].classList.remove('active');
+                    stages[currentStage - 1].classList.add('completed');
+                }
+                
+                if (currentStage < stages.length) {
+                    stages[currentStage].classList.add('active');
+                    currentStage++;
+                } else {
+                    clearInterval(interval);
+                    stages[stages.length - 1].classList.remove('active');
+                    stages[stages.length - 1].classList.add('completed');
+                }
+            }, 800);
         }
-
-        // Render the app
-        ReactDOM.render(<App />, document.getElementById('root'));
+        
+        function displayResults(data) {
+            pipelineContainer.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+            
+            // Confidence
+            const confidence = Math.round((data.confidence || 0.88) * 100);
+            document.getElementById('confidenceValue').textContent = confidence + '%';
+            document.getElementById('confidenceIndicator').style.left = confidence + '%';
+            
+            // Summary
+            document.getElementById('summaryText').textContent = 
+                data.insights?.summary || 'Analysis completed successfully';
+            
+            // Key Findings
+            const findingsContainer = document.getElementById('findingsContainer');
+            findingsContainer.innerHTML = '';
+            
+            const findings = data.insights?.key_findings || [];
+            findings.forEach((finding, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex items-start gap-3 p-4 bg-slate-800/30 rounded-lg border border-slate-700/50';
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                        <span class="text-sm font-bold text-purple-400">${index + 1}</span>
+                    </div>
+                    <p class="text-slate-300 flex-1">${finding}</p>
+                `;
+                findingsContainer.appendChild(div);
+            });
+            
+            // Recommendations
+            const recsContainer = document.getElementById('recommendationsContainer');
+            recsContainer.innerHTML = '';
+            
+            const recommendations = data.insights?.recommendations || [];
+            recommendations.forEach(rec => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg';
+                div.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-arrow-right text-yellow-400 mt-1"></i>
+                        <p class="text-white font-medium">${rec}</p>
+                    </div>
+                `;
+                recsContainer.appendChild(div);
+            });
+            
+            // Charts
+            createForecastChart();
+            createProductsChart();
+            
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function createForecastChart() {
+            const ctx = document.getElementById('forecastChart');
+            if (window.forecastChartInstance) window.forecastChartInstance.destroy();
+            
+            window.forecastChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                    datasets: [{
+                        label: 'Actual Sales',
+                        data: [680, 720, 650, 790, 820, 750, 880, 920],
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#3B82F6'
+                    }, {
+                        label: 'Forecast',
+                        data: [null, null, null, null, null, null, 920, 980, 1050],
+                        borderColor: '#A855F7',
+                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 4,
+                        pointBackgroundColor: '#A855F7'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#94A3B8', font: { size: 12 } }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#F1F5F9',
+                            bodyColor: '#CBD5E1',
+                            borderColor: '#475569',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                            ticks: { color: '#94A3B8' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                            ticks: { color: '#94A3B8' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createProductsChart() {
+            const ctx = document.getElementById('productsChart');
+            if (window.productsChartInstance) window.productsChartInstance.destroy();
+            
+            window.productsChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Blue T-Shirt', 'Red Hoodie', 'Black Jeans', 'White Sneakers', 'Green Cap'],
+                    datasets: [{
+                        label: 'Units Sold',
+                        data: [680, 420, 350, 290, 180],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(30, 41, 59, 0.8)',
+                            'rgba(241, 245, 249, 0.8)',
+                            'rgba(16, 185, 129, 0.8)'
+                        ],
+                        borderColor: [
+                            '#3B82F6',
+                            '#EF4444',
+                            '#1E293B',
+                            '#F1F5F9',
+                            '#10B981'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#F1F5F9',
+                            bodyColor: '#CBD5E1',
+                            borderColor: '#475569',
+                            borderWidth: 1,
+                            padding: 12
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                            ticks: { color: '#94A3B8' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#94A3B8', font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function showError(message) {
+            pipelineContainer.classList.add('hidden');
+            resultsContainer.innerHTML = `
+                <div class="glass-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center">
+                        <i class="fas fa-exclamation-triangle text-3xl text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Error Processing Query</h3>
+                    <p class="text-slate-400 mb-6">${message}</p>
+                    <div class="bg-slate-800/50 rounded-lg p-4 text-left">
+                        <p class="text-sm text-slate-300 mb-2"><strong>Troubleshooting:</strong></p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Ensure Rails API is running on port 3000</li>
+                            <li>• Ensure Python AI service is running on port 8000</li>
+                            <li>• Check that DEMO_MODE=true in both .env files</li>
+                        </ul>
+                    </div>
+                    <button onclick="location.reload()" class="mt-6 px-6 py-3 btn-primary rounded-lg font-semibold text-white">
+                        <i class="fas fa-redo mr-2"></i>Try Again
+                    </button>
+                </div>
+            `;
+            resultsContainer.classList.remove('hidden');
+        }
+        
+        // Keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' || (e.ctrlKey && e.key === 'k')) {
+                e.preventDefault();
+                queryInput.focus();
+            }
+        });
+        
+        // Initial state
+        suggestions.classList.remove('hidden');
     </script>
 </body>
 </html>
